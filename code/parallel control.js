@@ -1,3 +1,4 @@
+// 并行统计多个文件，将最终统计结果返回
 var fs = require('fs');
 var fileDir = './data/static/';
 var wordStatic = {};
@@ -48,3 +49,5 @@ function checkIfComplete(){
         }
     }
 }
+
+
