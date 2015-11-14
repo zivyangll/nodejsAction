@@ -5,14 +5,24 @@
 //HTTP/1.1 200 ok   HTTP版本是1.1,状态码200表示成功响应
 //Connection: keep-alive    连接是持久的,是HTTP1.1开始具备的,让很多实时功能成为可能
 
-/* // 创建web服务器
-var http = require('http');
-http.createServer(function(req,res){//创建了新的Web服务器对象，匿名函数告诉Web服务器，每当接收到请求时会发生什么。
-    res.writeHead(501,{'Content-Type':'text/plain'});//加入响应HTTP头
-    res.writeHead(301,{'Location':'http://www.baidu.com'});//重定向，发送了301响应代码以及位置头，告诉客户端重定向到哪里。
-    res.end("I'm writting program with Nodejs");
-}).listen(3000,"127.0.0.1");//定义了Web服务器的端口和主机
-console.log("Server is running at 'http://127.0.0.1:3000'")*/
+/*// 创建web服务器，方式一
+ var http = require('http');
+ http.createServer(function(require,response){
+ response.writeHead(200,{'Content-Type': 'text/plain'});
+ response.write('kaitou');
+ response.end('Hello World\n');
+ }).listen(3000); // or listen(3000,'127.0.0.1');
+ console.log("Server running at http://localhost:3000/");*/
+
+/*// 创建web服务器，方式二
+ var http = require('http');
+ var server = http.createServer();
+ server.on('request',function(req,res){
+ res.writeHead(200,{'Content-Type': 'text/plain'});
+ res.end('Hello World');
+ });
+ server.listen(3000);
+ console.log("Server running at http://localhost:3000/");*/
 
 // 使用URL模块响应不同的请求
 

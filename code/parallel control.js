@@ -51,3 +51,13 @@ function checkIfComplete(){
 }
 
 
+/* // 并行执行流程，先输出100，然后500，最后1000
+setTimeout(function () {
+    console.log('1000ms');
+}, 1000);
+setTimeout(function () {
+    console.log('500ms');
+}, 500);
+setTimeout(function () {
+    console.log('100ms');
+}, 100);*/

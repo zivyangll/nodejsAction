@@ -61,4 +61,20 @@ client.connect(function(error, results) {
 */
 
 // 使用MongoDB保存数据
-// 安装“mongodb-win32-i386-3.0.6” mongod -dbpath "C:\mongodb\data"
+// 安装“mongodb-win32-i386-3.0.6”
+// 连接数据库
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+    console.log('open mongoDB')
+});
+
+// 读取数据库
+
+// 更新数据库
+
+// 写入数据库
+
+// 删除数据库
