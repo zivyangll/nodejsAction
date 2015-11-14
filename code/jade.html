@@ -1,0 +1,8 @@
+<!-- Jade是基于缩进的HTML模版引擎，将视图编译成HTML，通常在视图文件夹中使用。--><!-- 使用Jade可以使得应用程序可以动态输出数据到HTML中，真正能力是操纵数据并输出数据到HTML中。--><!-- Jade使用缩进来定义HTML文档的层次结构，Jade无需使用标记，无需关闭HTML标记。--><!--Jade使用减号"-"告诉随后的代码应该被执行，使用等号"="告诉对随后的代码进行演算、转义，然后输出。#{变量}告诉Jade将变量替换为字符串值--><html><head></head><body><section id="wrapper"></section><p class="highlight"></p><section id="wrapper" class="class_nam"></section><section class="first second third"></section><h1>Very important heading</h1><p><span></span></p><p>Text can be over
+many lines
+after a pipe symbol</p><div class="wrapper"><h1>My holiday in Prague</h1><p>I had a great holidy.</p><img src="images/photo.jpg" alt="Me on holiday"/></div><h1>定义变量</h1><p>Foo is hello world!</p><p>Foo is hello world</p><h1>for循环</h1><ul><li>hello 定</li><li>hello 义</li><li>hello 循</li><li>hello 环</li></ul><h1>each循环</h1><ul><li>0: each</li><li>1: 循</li><li>2: 环</li></ul><h1>each循环json数据</h1><ul><li>1: 苹果</li><li>2: 梨子</li><li>3: 乔布斯</li></ul><h1>if 判断</h1><h2>描述</h2><p class="description">我喜欢猫</p><div id="user"><h2>描述</h2><p class="description">我喜欢猫</p></div><p>亲爱的 Alan 您并不是 VIP</p><h1>Case</h1><p>you have 10 friends</p><h1>case简写</h1><p>you have a friend</p><h1>在模板中调用其他语言</h1><ul><li>Markdown 标题
+这里使用的是 MarkDown 格式</li></ul><script>(function() {
+  console.log('这里是 coffee script');
+
+}).call(this);
+</script></body></html>
