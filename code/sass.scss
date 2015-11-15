@@ -1,0 +1,574 @@
+/*sass不使用大括号和分号；scss使用大括号和分号，兼容普通css
+ 安装：先安装Ruby(添加PATH),再安装Sass：gem install sass
+  作用：简化css工作流,引入了变量,混合,嵌套和选择器继承*/
+
+// ------------sdf-------导入外部scss文件-------------------------------
+@import '../data/a';
+
+// -------------------定义变量-------------------------------
+$fontSize: 12px;
+body{
+  font-size:$fontSize;
+}
+// css
+body {
+  font-size: 12px; }
+
+
+// -------------------默认变量-------------------------------
+$baseLineHeight: 1.5 !default;
+body{
+  line-height: $baseLineHeight;
+}
+//css
+body {
+  line-height: 1.5; }
+
+// ----------------------覆盖默认变量-------------------------------------------
+$baseLineHeight:        2;
+$baseLineHeight:        1.5 !default;
+body{
+  line-height: $baseLineHeight;
+}
+//css
+body {
+  line-height: 2; }
+
+// ----------------------特殊变量：需要嵌入字符串中-------------------------------------------
+$borderDirection:       top !default;
+$baseFontSize:          12px !default;
+$baseLineHeight:        1.5 !default;
+
+//应用于class和属性
+.border-#{$borderDirection}{
+  border-#{$borderDirection}:1px solid #ccc;
+}
+//css
+.border-top {
+  border-top: 1px solid #ccc; }
+
+//应用于复杂的属性值
+body{
+  font:$baseFontSize/$baseLineHeight;
+}
+//css
+body {
+  font: 6px; }
+
+// -----------------------多值变量：list------------------------------------------
+//一维数据
+$px: 5px 10px 20px 30px;
+//二维数据，相当于js中的二维数组
+$px: 5px 10px, 20px 30px;
+$px: (5px 10px) (20px 30px);
+
+$linkColor: #08c #333 !default;//第一个值为默认值，第二个鼠标滑过值
+a{
+  color:nth($linkColor,1);
+  &:hover{
+    color:nth($linkColor,2);
+  }
+}
+//css
+a {
+  color: #08c; }
+a:hover {
+  color: #333; }
+
+// -----------------------多值变量：map------------------------------------------
+$headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
+@each $header, $size in $headings {
+  #{$header} {
+    font-size: $size;
+  }
+}
+//css
+h1 {
+  font-size: 2em; }
+h2 {
+  font-size: 1.5em; }
+h3 {
+  font-size: 1.2em; }
+
+// ---------------------------全局变量--------------------------------------
+$fontSize:      12px !global;
+body{
+  $fontSize: 14px; // 局部变量
+  font-size:$fontSize;
+}
+p{
+  font-size:$fontSize; // 全局变量
+}
+//css
+body {
+  font-size: 14px; }
+p {
+  font-size: 12px; }
+
+// ---------------------------选择器的嵌套--------------------------------
+#top_nav{
+  line-height: 40px;
+  text-transform: capitalize;
+  background-color:#333;
+  li{
+    float:left;
+  }
+  a{
+    display: block;
+    padding: 0 10px;
+    color: #fff;
+
+    &:hover{ // &表示父元素选择器
+      color:#ddd;
+    }
+  }
+}
+//css
+#top_nav {
+  line-height: 40px;
+  text-transform: capitalize;
+  background-color: #333; }
+#top_nav li {
+  float: left; }
+#top_nav a {
+  display: block;
+  padding: 0 10px;
+  color: #fff; }
+#top_nav a:hover {
+  color: #ddd; }
+
+// --------------------------属性嵌套---------------------------------------
+.fakeshadow {
+  border: {
+    style: solid;
+    left: {
+      width: 4px;
+      color: #888;
+    }
+    right: {
+      width: 2px;
+      color: #ccc;
+    }
+  }
+}
+//css
+.fakeshadow {
+  border-style: solid;
+  border-left-width: 4px;
+  border-left-color: #888;
+  border-right-width: 2px;
+  border-right-color: #ccc;
+}
+
+// ----------------------------跳出所有上级选择器-------------------------------------
+//没有跳出
+.parent-1 {
+  color:#f00;
+  .child {
+    width:100px;
+  }
+}
+//css
+.parent-1 {
+  color: #f00;
+}
+.parent-1 .child {
+  width: 100px;
+}
+
+//单个选择器跳出
+.parent-2 {
+  color:#f00;
+  @at-root .child {
+    width:200px;
+  }
+}
+//css
+.parent-2 {
+  color: #f00;
+}
+.child {
+  width: 200px;
+}
+
+//多个选择器跳出
+.parent-3 {
+  background:#f00;
+  @at-root {
+    .child1 {
+      width:300px;
+    }
+    .child2 {
+      width:400px;
+    }
+  }
+}
+//css
+.parent-3 {
+  background: #f00;
+}
+.child1 {
+  width: 300px;
+}
+.child2 {
+  width: 400px;
+}
+
+// ----------------------------跳出media嵌套-------------------------------------
+//跳出media嵌套，父级有效
+@media print {
+  .parent2{
+    color:#f00;
+    @at-root (without: media) {
+      .child2 {
+        width:200px;
+      }
+    }
+  }
+}
+//css
+@media print {
+  .parent2 {
+    color: #f00;
+  }
+}
+.parent2 .child2 {
+  width: 200px;
+}
+
+//跳出media和父级
+@media print {
+  .parent3{
+    color:#f00;
+    @at-root (without: all) {
+      .child3 {
+        width:200px;
+      }
+    }
+  }
+}
+//css
+@media print {
+  .parent3 {
+    color: #f00;
+  }
+}
+.child3 {
+  width: 200px;
+}
+
+// @at-root与&配合使用
+.child{
+  @at-root .parent &{
+    color:#f00;
+  }
+}
+//css
+.parent .child {
+  color: #f00; }
+
+
+// ---------------------------无参数mixin--------------------------------------
+@mixin center-block {
+  margin-left:auto;
+  margin-right:auto;
+}
+.demo{
+  @include center-block; // 通过@include调用mixin
+}
+//css
+.demo{
+  margin-left:auto;
+  margin-right:auto;}
+
+// ---------------------------有参数mixin--------------------------------------
+@mixin opacity($opacity:50) {
+  opacity: $opacity / 100;
+  filter: alpha(opacity=$opacity);
+}
+.opacity{
+  @include opacity; //参数使用默认值
+}
+//css
+.opacity {
+  opacity: 0.5;
+  filter: alpha(opacity=50); }
+
+.opacity-80{
+  @include opacity(80); //传递参数
+}
+//css
+.opacity-80 {
+  opacity: 0.8;
+  filter: alpha(opacity=80); }
+
+// -------------------------多个参数mixin----------------------------------------
+@mixin horizontal-line($border:1px dashed #ccc, $padding:10px){
+  border-bottom:$border;
+  padding-top:$padding;
+  padding-bottom:$padding;
+}
+.imgtext-h li{
+  @include horizontal-line(1px solid #ccc);
+}
+//css
+.imgtext-h li {
+  border-bottom: 1px solid #ccc;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.imgtext-h--product li{
+  @include horizontal-line($padding:15px);
+}
+//css
+.imgtext-h--product li {
+  border-bottom: 1px dashed #ccc;
+  padding-top: 15px;
+  padding-bottom: 15px; }
+
+// -------------------------多组值参数mixin----------------------------------------
+//box-shadow可以有多组值，所以在变量参数后面添加...
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow:$shadow;
+  box-shadow:$shadow;
+}
+.box{
+  border:1px solid #ccc;
+  @include box-shadow(0 2px 2px rgba(0,0,0,.3),0 3px 3px rgba(0,0,0,.3),0 4px 4px rgba(0,0,0,.3));
+}
+//css
+.box {
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.3), 0 4px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.3), 0 4px 4px rgba(0, 0, 0, 0.3); }
+
+// -----------------------@content:使@mixin接受一整块样式,从@content开始--------------------------
+@mixin max-screen($res){
+  @media only screen and ( max-width: $res )
+  {
+    @content;
+  }
+}
+@include max-screen(480px) {
+  body { color: red }
+}
+//css
+@media only screen and (max-width: 480px) {
+  body {
+    color: red; } }
+
+// -------------------------选择器继承----------------------------------------
+h1{
+  border: 4px solid #ff9aa9;
+}
+.speaker{
+  @extend h1;
+  border-width: 2px;
+}
+//css
+h1, .speaker {
+  border: 4px solid #ff9aa9; }
+.speaker {
+  border-width: 2px; }
+
+// ------------------------占位选择器%:不调用则不会有任何多余的css文件---------------
+%ir{
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+$lte7: 0;
+%clearfix{ // 用到的时候在显示在css中
+  @if $lte7 {
+    *zoom: 1;
+  }
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+    font: 0/0 a;
+  }
+  &:after {
+    clear: both;
+  }
+}
+#header{
+  h6{
+    @extend %ir;
+    width:300px;
+  }
+}
+.ir{
+  @extend %ir;
+}
+//css
+#header h6, .ir {
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0; }
+
+#header h6 {
+  width: 300px; }
+
+
+// ----------------------------函数-------------------------------------
+$baseFontSize:      10px !default;
+$gray:              #ccc !default;
+
+// pixels to rems
+@function pxToRem($px) {
+  @return $px / $baseFontSize * 1rem;
+}
+
+body{
+  font-size:$baseFontSize;
+  color:lighten($gray,10%); // sass函数
+}
+//css
+body {
+  font-size: 12px;
+  color: #e6e6e6; }
+
+.test{
+  font-size:pxToRem(16px); // 自定义函数
+  color:darken($gray,10%);
+}
+//css
+.test {
+  font-size: 1.33333rem;
+  color: #b3b3b3; }
+
+// --------------------------Sass函数-----------------------------------
+// http://www.w3cplus.com/preprocessor/sass-color-function.html 颜色函数
+// http://sass-lang.com/documentation/Sass/Script/Functions.html sass所有函数
+
+// ----------------------------运算：运算符前后请留一个空格----------------
+$baseFontSize:          14px !default;
+$baseLineHeight:        1.5 !default;
+$baseGap:               $baseFontSize * $baseLineHeight !default;
+$halfBaseGap:           $baseGap / 2  !default;
+$samllFontSize:         $baseFontSize - 2px  !default;
+
+//grid
+$_columns:                     12 !default;      // Total number of columns
+$_column-width:                60px !default;   // Width of a single column
+$_gutter:                      20px !default;     // Width of the gutter
+$_gridsystem-width:            $_columns * ($_column-width + $_gutter); //grid system width
+
+// ---------------------------条件判断--------------------------------------
+$lte7: true;
+$type: monster;
+.ib{
+  display:inline-block;
+  @if $lte7 {
+    *display:inline;
+    *zoom:1;
+  }
+}
+//css
+.ib {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+p {
+  @if $type == ocean {
+    color: blue;
+  } @else if $type == matador {
+    color: red;
+  } @else if $type == monster {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+//css
+p {
+  color: green; }
+
+// ----------------------------if三目判断-------------------------------------
+//if(true, 1px, 2px)
+
+// ---------------------------for循环--------------------------------------
+@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}
+//css
+.item-1 {
+  width: 2em; }
+.item-2 {
+  width: 4em; }
+.item-3 {
+  width: 6em; }
+
+// ------------------------@each循环-----------------------------------------
+$animal-list: puma, sea-slug, egret, salamander;
+@each $animal in $animal-list {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+  }
+}
+//css
+.puma-icon {
+  background-image: url("/images/puma.png"); }
+.sea-slug-icon {
+  background-image: url("/images/sea-slug.png"); }
+.egret-icon {
+  background-image: url("/images/egret.png"); }
+.salamander-icon {
+  background-image: url("/images/salamander.png"); }
+
+// ------------------------while循环-----------------------------------------
+//$i: 6;
+//@while $i > 0 {
+//  .item-{$i} {
+//  font-size: 2em * $i;
+//}
+//  $i: $i-2;
+//}
+// ------------------------多个字段list数据循环-----------------------------------------
+$animal-data: (puma, black, default),(sea-slug, blue, pointer),(egret, white, move);
+@each $animal, $color, $cursor in $animal-data {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+    border: 2px solid $color;
+    cursor: $cursor;
+  }
+}
+//css
+.puma-icon {
+  background-image: url("/images/puma.png");
+  border: 2px solid black;
+  cursor: default; }
+.sea-slug-icon {
+  background-image: url("/images/sea-slug.png");
+  border: 2px solid blue;
+  cursor: pointer; }
+.egret-icon {
+  background-image: url("/images/egret.png");
+  border: 2px solid white;
+  cursor: move; }
+
+
+// ------------------------多个字段map数据循环-----------------------------------------
+$headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
+@each $header, $size in $headings {
+  #{$header} {
+    font-size: $size;
+  }
+}
+//css
+h1, .speaker {
+  font-size: 2em; }
+h2 {
+  font-size: 1.5em; }
+h3 {
+  font-size: 1.2em; }
+
+// -----------------------------------------------------------------
+
+// -----------------------------------------------------------------
+
+// -----------------------------------------------------------------

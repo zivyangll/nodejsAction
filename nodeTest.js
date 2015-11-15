@@ -54,6 +54,16 @@ http.get({host:"music.douban.com"}, function (res) {
     console.log("Got error: " + e.message);
 });*/
 
+// 以下代码在浏览器中执行，用函数和不用函数，效率相差5倍，解释：
+// function foo(){
+for(var i = 1; i <= 10; i++){
+    console.time(i);
+    for(var j = 0; j < 256*256*256; j++){
+    }
+    console.timeEnd(i);
+}
+// }
+// foo();
 
 
 
