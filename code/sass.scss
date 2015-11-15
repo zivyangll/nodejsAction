@@ -488,11 +488,28 @@ p {
 p {
   color: green; }
 
-// ----------------------------if三目判断-------------------------------------
-//if(true, 1px, 2px)
+// ----------------------------if判断,debug输出调试信息-------------------------------------
+$boolean: true !default;
+
+@mixin simple-mixin {
+  @if $boolean {
+    @debug "$boolean is #{$boolean}";
+    display: block;
+  }
+  @else {
+    @debug "$boolean is #{$boolean}";
+    display: none;
+  }
+}
+.some-selector {
+  @include simple-mixin;
+}
+//css
+.some-selector {
+  display: block; }
 
 // ---------------------------for循环--------------------------------------
-@for $i from 1 through 3 {
+@for $i from 1 through 3 { // 包括3   // @for $i from 1 to 3    不包括3
   .item-#{$i} { width: 2em * $i; }
 }
 //css
@@ -521,13 +538,25 @@ $animal-list: puma, sea-slug, egret, salamander;
   background-image: url("/images/salamander.png"); }
 
 // ------------------------while循环-----------------------------------------
-//$i: 6;
-//@while $i > 0 {
-//  .item-{$i} {
-//  font-size: 2em * $i;
-//}
-//  $i: $i-2;
-//}
+$types: 4;
+$type-width: 20px;
+
+@while $types > 0 {
+  .while-#{$types} {
+    width: $type-width + $types;
+  }
+  $types: $types - 1;
+}
+//css
+.while-4 {
+  width: 24px; }
+.while-3 {
+  width: 23px; }
+.while-2 {
+  width: 22px; }
+.while-1 {
+  width: 21px; }
+
 // ------------------------多个字段list数据循环-----------------------------------------
 $animal-data: (puma, black, default),(sea-slug, blue, pointer),(egret, white, move);
 @each $animal, $color, $cursor in $animal-data {
