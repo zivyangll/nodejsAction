@@ -1,38 +1,40 @@
-//Module.exports²ÅÊÇÕæÕıµÄ½Ó¿Ú£¬exportsÖ»²»¹ıÊÇËüµÄÒ»¸ö¸¨Öú¹¤¾ß¡£
-//ÈôÃ»ÓĞÏÔÊ½µÄ¸øModule.exportsÉèÖÃÈÎºÎÊôĞÔºÍ·½·¨£¬ÄÇÃ´ÄãµÄÄ£¿é¾ÍÊÇexportsÉèÖÃ¸øModule.exportsµÄÊôĞÔ
-//Module.exportsÒÑ¾­¾ß±¸Ò»Ğ©ÊôĞÔºÍ·½·¨£¬ÄÇÃ´exportsÊÕ¼¯À´µÄĞÅÏ¢½«±»ºöÂÔ
+//Module.exportsæ‰æ˜¯çœŸæ­£çš„æ¥å£ï¼Œexportsåªä¸è¿‡æ˜¯å®ƒçš„ä¸€ä¸ªè¾…åŠ©å·¥å…·ã€‚
+//è‹¥æ²¡æœ‰æ˜¾å¼çš„ç»™Module.exportsè®¾ç½®ä»»ä½•å±æ€§å’Œæ–¹æ³•ï¼Œé‚£ä¹ˆä½ çš„æ¨¡å—å°±æ˜¯exportsè®¾ç½®ç»™Module.exportsçš„å±æ€§
+//Module.exportså·²ç»å…·å¤‡ä¸€äº›å±æ€§å’Œæ–¹æ³•ï¼Œé‚£ä¹ˆexportsæ”¶é›†æ¥çš„ä¿¡æ¯å°†è¢«å¿½ç•¥
 
 /*// rocker.js
-exports.name = function() {
-    console.log('My name is Lemmy Kilmister');
-};
-// µÈ¼ÛÓÚ£º
-module.exports.name = function() {
-    console.log('My name is Lemmy Kilmister');
-};
+ exports.name = function() {
+ console.log('My name is Lemmy Kilmister');
+ };
+ // ç­‰ä»·äºï¼š
+ module.exports.name = function() {
+ console.log('My name is Lemmy Kilmister');
+ };
 
-// user.js
-var rocker = require('./rocker.js');
-rocker.name(); // 'My name is Lemmy Kilmister' */
+ // user.js
+ var rocker = require('./rocker.js');
+ rocker.name(); // 'My name is Lemmy Kilmister' */
 
-/*//ÊµÀı2£º
-module.exports = 'ROCK IT!';
-exports.name = function() {
-    console.log('My name is Lemmy Kilmister');
-};
+/*//å®ä¾‹2ï¼š
+ module.exports = 'ROCK IT!';
+ exports.name = function() {
+ console.log('My name is Lemmy Kilmister');
+ };
 
-var rocker = require('./rocker.js');
-rocker.name(); // TypeError: Object ROCK IT! has no method 'name' */
+ var rocker = require('./rocker.js');
+ rocker.name(); // TypeError: Object ROCK IT! has no method 'name' */
 
-/*// ÊµÀı3£º
-module.exports = function(name, age) {
-    this.name = name;
-    this.age = age;
-    this.about = function() {
-        console.log(this.name +' is '+ this.age +' years old');
-    };
-};
+/*// å®ä¾‹3ï¼š
+ module.exports = function(name, age) {
+ this.name = name;
+ this.age = age;
+ this.about = function() {
+ console.log(this.name +' is '+ this.age +' years old');
+ };
+ };
 
-var Rocker = require('./rocker.js');
-var r = new Rocker('Ozzy', 62);
-r.about(); // Ozzy is 62 years old */
+ var Rocker = require('./rocker.js');
+ var r = new Rocker('Ozzy', 62);
+ r.about(); // Ozzy is 62 years old */
+
+console.log(module.paths); //è¾“å‡ºnodejsçš„æ¨¡å—è·¯å¾„

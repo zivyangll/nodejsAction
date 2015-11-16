@@ -1,11 +1,11 @@
-//HTTP¶¨ÒåÁË·şÎñÆ÷ºÍ¿Í»§¶ËÔÚÍ¨ĞÅµÄÊ±ºò,ÈçºÎ·¢ËÍºÍ½ÓÊÜÊı¾İ.
-//Node.js¿ÉÒÔ´´½¨HTTP·şÎñÆ÷ºÍHTTP¿Í»§¶Ë
-//HTTPÍ··¢ËÍµÄÊÇ¸½¼ÓµÄĞÅÏ¢,°üÀ¨ÄÚÈİÀàĞÍ,·şÎñÆ÷·¢ËÍÏìÓ¦µÄÈÕÆÚÒÔ¼°HTTP×´Ì¬Âë
-//Ä¬ÈÏ·¢ËÍÁË:
-//HTTP/1.1 200 ok   HTTP°æ±¾ÊÇ1.1,×´Ì¬Âë200±íÊ¾³É¹¦ÏìÓ¦
-//Connection: keep-alive    Á¬½ÓÊÇ³Ö¾ÃµÄ,ÊÇHTTP1.1¿ªÊ¼¾ß±¸µÄ,ÈÃºÜ¶àÊµÊ±¹¦ÄÜ³ÉÎª¿ÉÄÜ
+//HTTPå®šä¹‰äº†æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯åœ¨é€šä¿¡çš„æ—¶å€™,å¦‚ä½•å‘é€å’Œæ¥å—æ•°æ®.
+//Node.jså¯ä»¥åˆ›å»ºHTTPæœåŠ¡å™¨å’ŒHTTPå®¢æˆ·ç«¯
+//HTTPå¤´å‘é€çš„æ˜¯é™„åŠ çš„ä¿¡æ¯,åŒ…æ‹¬å†…å®¹ç±»å‹,æœåŠ¡å™¨å‘é€å“åº”çš„æ—¥æœŸä»¥åŠHTTPçŠ¶æ€ç 
+//é»˜è®¤å‘é€äº†:
+//HTTP/1.1 200 ok   HTTPç‰ˆæœ¬æ˜¯1.1,çŠ¶æ€ç 200è¡¨ç¤ºæˆåŠŸå“åº”
+//Connection: keep-alive    è¿æ¥æ˜¯æŒä¹…çš„,æ˜¯HTTP1.1å¼€å§‹å…·å¤‡çš„,è®©å¾ˆå¤šå®æ—¶åŠŸèƒ½æˆä¸ºå¯èƒ½
 
-/*// ´´½¨web·şÎñÆ÷£¬·½Ê½Ò»
+/*// åˆ›å»ºwebæœåŠ¡å™¨ï¼Œæ–¹å¼ä¸€
  var http = require('http');
  http.createServer(function(require,response){
  response.writeHead(200,{'Content-Type': 'text/plain'});
@@ -14,7 +14,7 @@
  }).listen(3000); // or listen(3000,'127.0.0.1');
  console.log("Server running at http://localhost:3000/");*/
 
-/*// ´´½¨web·şÎñÆ÷£¬·½Ê½¶ş
+/*// åˆ›å»ºwebæœåŠ¡å™¨ï¼Œæ–¹å¼äºŒ
  var http = require('http');
  var server = http.createServer();
  server.on('request',function(req,res){
@@ -24,109 +24,110 @@
  server.listen(3000);
  console.log("Server running at http://localhost:3000/");*/
 
-// Ê¹ÓÃURLÄ£¿éÏìÓ¦²»Í¬µÄÇëÇó
+// ä½¿ç”¨URLæ¨¡å—å“åº”ä¸åŒçš„è¯·æ±‚
 
-/*// Â·ÓÉ£ºÓ¦ÓÃ³ÌĞòÒªÏìÓ¦µÄÇëÇó
-var url = require("url");
-var requestURL = "http://daily.zhihu.com/story/4688312";
-console.log(url.parse(requestURL).hostname);//»ñÈ¡Ö÷»úÃû³Æ
-console.log(url.parse(requestURL).port);//»ñÈ¡¶Ë¿Ú
-console.log(url.parse(requestURL).pathname);//»ñÈ¡Â·¾¶Ãû³Æ*/
+/*// è·¯ç”±ï¼šåº”ç”¨ç¨‹åºè¦å“åº”çš„è¯·æ±‚
+ var url = require("url");
+ var requestURL = "http://daily.zhihu.com/story/4688312";
+ console.log(url.parse(requestURL).hostname);//è·å–ä¸»æœºåç§°
+ console.log(url.parse(requestURL).port);//è·å–ç«¯å£
+ console.log(url.parse(requestURL).pathname);//è·å–è·¯å¾„åç§°*/
 
-/*// Í¨¹ıURL´´½¨¶ÔÓÚĞí¶à²»Í¬ÇëÇó½øĞĞÏìÓ¦µÄ·şÎñÆ÷£¬¸´ÔÓÇé¿öÊ¹ÓÃExpress
-var http = require("http");
-var url = require("url");
-http.createServer(function(req,res){
-    var pathname = url.parse(req.url).pathname;
-    if(pathname =='/'){
-        res.writeHead(200,{"Content-Type":"text/plain"});
-        res.end("home page\n")
-    }
-    if(pathname == '/about'){
-        res.writeHead(200,{"Content-Type":"text/plain"});
-        res.end("about")
-    }
-    if(pathname == '/yll'){
-        res.writeHead(200,{"Content-Type":"text/plain"});
-        res.end("my name is yll.")
-    }
-    if(pathname == "/redirect"){
-        res.writeHead(301,{"Location":"/"});
-        res.end();
-    }
-    else{
-        res.writeHead(404,{"Content-Type":"text/plain"});
-        res.end("page not found!");
-    }
-}).listen(3000,"127.0.0.1");
-console.log("server running at http://127.0.0.1:3000");*/
+/*// é€šè¿‡URLåˆ›å»ºå¯¹äºè®¸å¤šä¸åŒè¯·æ±‚è¿›è¡Œå“åº”çš„æœåŠ¡å™¨ï¼Œå¤æ‚æƒ…å†µä½¿ç”¨Express
+ var http = require("http");
+ var url = require("url");
+ http.createServer(function(req,res){
+ var pathname = url.parse(req.url).pathname;
+ if(pathname =='/'){
+ res.writeHead(200,{"Content-Type":"text/plain"});
+ res.end("home page\n")
+ }
+ if(pathname == '/about'){
+ res.writeHead(200,{"Content-Type":"text/plain"});
+ res.end("about")
+ }
+ if(pathname == '/yll'){
+ res.writeHead(200,{"Content-Type":"text/plain"});
+ res.end("my name is yll.")
+ }
+ if(pathname == "/redirect"){
+ res.writeHead(301,{"Location":"/"});
+ res.end();
+ }
+ else{
+ res.writeHead(404,{"Content-Type":"text/plain"});
+ res.end("page not found!");
+ }
+ }).listen(3000,"127.0.0.1");
+ console.log("server running at http://127.0.0.1:3000");*/
 
-// Ê¹ÓÃNode.js´´½¨HTTP¿Í»§¶Ë
-// HTTP¿Í»§¶Ë¿ÉÒÔ¶ÔÈÎºÎ·şÎñÇëÇóÏìÓ¦µÄ¶«Î÷£ºWebä¯ÀÀÆ÷¡¢ËÑË÷ÒıÇæ»úÆ÷ÈË¡¢µç×ÓÓÊ¼ş¿Í»§¶Ë¡¢Web Scraper
-// ÓÃÍ¾£º¼à¿Ø·şÎñÆ÷µÄÕı³£¹¤×÷Ê±¼ä¡¢ÅÀÈ¡²»ÄÜÍ¨¹ıAPI»ñÈ¡µÄWebÄÚÈİ¡¢´´½¨½«À´×ÔWebµÄÁ½¸ö»òÕß¸ü¶àĞÅÏ¢À´Ô´×éºÏÔÚÒ»ÆğµÄmashup£¬µ÷ÓÃÆäËûWeb ServiceµÄAPI
-// Í¨¹ıÊ¹ÓÃhttp.get()·½·¨ÊµÏÖ¶Ô·şÎñÆ÷µÄGETÇëÇó£¬ĞèÒªÌá¹©options¶ÔÏó£¨Ö÷»ú¡¢¶Ë¿Ú¡¢Â·¾¶£©
+// ä½¿ç”¨Node.jsåˆ›å»ºHTTPå®¢æˆ·ç«¯
+// HTTPå®¢æˆ·ç«¯å¯ä»¥å¯¹ä»»ä½•æœåŠ¡è¯·æ±‚å“åº”çš„ä¸œè¥¿ï¼šWebæµè§ˆå™¨ã€æœç´¢å¼•æ“æœºå™¨äººã€ç”µå­é‚®ä»¶å®¢æˆ·ç«¯ã€Web Scraper
+// ç”¨é€”ï¼šç›‘æ§æœåŠ¡å™¨çš„æ­£å¸¸å·¥ä½œæ—¶é—´ã€çˆ¬å–ä¸èƒ½é€šè¿‡APIè·å–çš„Webå†…å®¹ã€åˆ›å»ºå°†æ¥è‡ªWebçš„ä¸¤ä¸ªæˆ–è€…æ›´å¤šä¿¡æ¯æ¥æºç»„åˆåœ¨ä¸€èµ·çš„mashupï¼Œè°ƒç”¨å…¶ä»–Web Serviceçš„API
+// é€šè¿‡ä½¿ç”¨http.get()æ–¹æ³•å®ç°å¯¹æœåŠ¡å™¨çš„GETè¯·æ±‚ï¼Œéœ€è¦æä¾›optionså¯¹è±¡ï¼ˆä¸»æœºã€ç«¯å£ã€è·¯å¾„ï¼‰
 
-/*// ´´½¨Ò»¸öHTTP¿Í»§¶Ë£¬²¢»ñÈ¡Ò»¸öÒ³ÃæµÄHTTP×´Ì¬Âë²¢¼ì²éÏìÓ¦´úÂë
-var http = require("http");
-var options = {
-    host:"movie.douban.com",
-    port:80,
-    path:"/"
-};
-http.get(options,function(res) {
-    if (res.statusCode === 200) {
-        console.log("The site is up!");
-    }
-    else {
-        console.log("The Site is down!");
-    }
-}).on("error",function(e){
-    console.log("error");
-});*/
+/*// åˆ›å»ºä¸€ä¸ªHTTPå®¢æˆ·ç«¯ï¼Œå¹¶è·å–ä¸€ä¸ªé¡µé¢çš„HTTPçŠ¶æ€ç å¹¶æ£€æŸ¥å“åº”ä»£ç 
+ var http = require("http");
+ var options = {
+ host:"movie.douban.com",
+ port:80,
+ path:"/"
+ };
+ http.get(options,function(res) {
+ if (res.statusCode === 200) {
+ console.log("The site is up!");
+ }
+ else {
+ console.log("The Site is down!");
+ }
+ }).on("error",function(e){
+ console.log("error");
+ });*/
 
-/* // nodejs·¢²¼Îªweb·şÎñ£¬Ìá¹©¿Í»§¶Ë½Ó¿Ú£¬ÀàËÆÓÚjavaÖĞµÄservlet
-// .cmdÎÄ¼şÈÃ³ÌĞò×Ô¶¯Ö´ĞĞ: "%~dp0node.exe" "%~dp0app.js"
-var HTTP  = require('http');
-var queryServer = HTTP.createServer(queryConnectionHandler);
-queryServer.listen(1333, function (err) {
-    console.log('call service interface: http://127.0.0.1:1333/?a=3&b=8');
-    if (err) throw err;
-});
-function queryConnectionHandler(req, res) {
-    var args   = require('url').parse(req.url.toLowerCase(), true);
-    var a = args.query.a;//»ñµÃ²ÎÊıa
-    var b = args.query.b;//»ñµÃ²ÎÊıb
-    var states = {
-        error: function () {
-            res.writeHead(200, {
-                'Content-Type': 'text/plain',
-                'Access-Control-Allow-Origin': '*'
-            });
-            res.end('false');
-        },
-        ok: function () {
-            res.writeHead(200, {
-                'Content-Type': 'text/plain',
-                'Access-Control-Allow-Origin': '*'
-            });
-            res.end('ok');
-        },
-        message: function (obj) {
-            res.writeHead(200, {
-                'Content-Type': 'application/json;charset=utf-8',
-                'Access-Control-Allow-Origin': '*'
-            });
-            res.end(JSON.stringify(obj));
-        }
-    };
-    // ÕâÀïĞ´¾ßÌåÊµÏÖ
-    states.message( /!* ÕâÀï·µ»ØÖµ *!/ addTwoInt(a,b) );
-}
-function addTwoInt(a,b){
-    a = parseInt(a);
-    b = parseInt(b);
-    var c = a + b;
-    return c;
-}*/
+/* // nodejså‘å¸ƒä¸ºwebæœåŠ¡ï¼Œæä¾›å®¢æˆ·ç«¯æ¥å£ï¼Œç±»ä¼¼äºjavaä¸­çš„servlet
+ // .cmdæ–‡ä»¶è®©ç¨‹åºè‡ªåŠ¨æ‰§è¡Œ: "%~dp0node.exe" "%~dp0app.js"
+ var HTTP  = require('http');
+ var queryServer = HTTP.createServer(queryConnectionHandler);
+ queryServer.listen(1333, function (err) {
+ console.log('call service interface: http://127.0.0.1:1333/?a=3&b=8');
+ if (err) throw err;
+ });
+ function queryConnectionHandler(req, res) {
+ var args   = require('url').parse(req.url.toLowerCase(), true);
+ var a = args.query.a;//è·å¾—å‚æ•°a
+ var b = args.query.b;//è·å¾—å‚æ•°b
+ var states = {
+ error: function () {
+ res.writeHead(200, {
+ 'Content-Type': 'text/plain',
+ 'Access-Control-Allow-Origin': '*'
+ });
+ res.end('false');
+ },
+ ok: function () {
+ res.writeHead(200, {
+ 'Content-Type': 'text/plain',
+ 'Access-Control-Allow-Origin': '*'
+ });
+ res.end('ok');
+ },
+ message: function (obj) {
+ res.writeHead(200, {
+ 'Content-Type': 'application/json;charset=utf-8',
+ 'Access-Control-Allow-Origin': '*'
+ });
+ res.end(JSON.stringify(obj));
+ }
+ };
+ // è¿™é‡Œå†™å…·ä½“å®ç°
+ states.message( /!* è¿™é‡Œè¿”å›å€¼ *!/ addTwoInt(a,b) );
+ }
+ function addTwoInt(a,b){
+ a = parseInt(a);
+ b = parseInt(b);
+ var c = a + b;
+ return c;
+ }*/
+
 
 

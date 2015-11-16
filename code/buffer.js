@@ -1,33 +1,70 @@
-//ĞèÒª½øĞĞ¶ş½øÖÆ´«ÊäµÄÊ¾ÀıÓĞ £ºÍ¨¹ıTCPÁ¬½Ó·¢ËÍºÍ½ÓÊÕÊı¾İ£¬´ÓÍ¼Ïñ»òÕßÑ¹ËõÎÄ¼ş¶ÁÈ¡¶ş½øÖÆÊı¾İ£»´ÓÎÄ¼şÏµÍ³¶ÁĞ´Êı¾İ£¬´¦ÀíÀ´×ÔÍøÂçµÄ¶ş½øÖÆÊı¾İÁ÷¡£
-//BufferÄ£¿é¿ÉÒÔ´æ´¢¶ş½øÖÆÊı¾İ£¬Èô²»ÉèÖÃÎÄ¼ş±àÂë£¬ÔòÊä³öÔ­Ê¼Buffer¶ÔÏó£º<Buffer 6d 79 20 6e 61 6d 65 20 69 73 20 79 61 6e 67 6c 6f 6e 67 6c 6f 6e 67 2e 0a>
-//ÉèÖÃ±àÂë£ºfs.readFile("a.txt","utf8",function(err,data){}); °üÀ¨ascii,ucs3,base64,hex,utf8
+//éœ€è¦è¿›è¡ŒäºŒè¿›åˆ¶ä¼ è¾“çš„ç¤ºä¾‹æœ‰ ï¼šé€šè¿‡TCPè¿æ¥å‘é€å’Œæ¥æ”¶æ•°æ®ï¼Œä»å›¾åƒæˆ–è€…å‹ç¼©æ–‡ä»¶è¯»å–äºŒè¿›åˆ¶æ•°æ®ï¼›ä»æ–‡ä»¶ç³»ç»Ÿè¯»å†™æ•°æ®ï¼Œå¤„ç†æ¥è‡ªç½‘ç»œçš„äºŒè¿›åˆ¶æ•°æ®æµã€‚
+//Bufferæ¨¡å—å¯ä»¥å­˜å‚¨äºŒè¿›åˆ¶æ•°æ®ï¼Œè‹¥ä¸è®¾ç½®æ–‡ä»¶ç¼–ç ï¼Œåˆ™è¾“å‡ºåŸå§‹Bufferå¯¹è±¡ï¼š<Buffer 6d 79 20 6e 61 6d 65 20 69 73 20 79 61 6e 67 6c 6f 6e 67 6c 6f 6e 67 2e 0a>
+// Bufferå†…å­˜åˆ†é…ä¸æ˜¯åœ¨V8çš„å †å†…å­˜ä¸­ï¼Œè€Œæ˜¯åœ¨C++å±‚é¢å®ç°å†…å­˜çš„ç”³è¯·ï¼Œé‡‡ç”¨slabåˆ†é…æœºåˆ¶
+
+/*//è®¾ç½®ç¼–ç ï¼šfs.readFile("a.txt","utf8",function(err,data){}); åŒ…æ‹¬ascii,ucs3,base64,hex,utf8
 var fs = require("fs");
 fs.readFile("../data/a.txt",function(err,data){
-    if(err){
-        throw err;
-    }else{
-        console.log(data);
-        console.log(data.toString("utf8"));
-    }
+	if(err){
+		throw err;
+	}else{
+		console.log(data);
+		console.log(data.toString("utf8"));
+	}
+});*/
+
+/*// è®¾ç½®ç¼–ç å‡½æ•°ï¼š
+var fs = require('fs');
+var rs = fs.createReadStream('../data/a.txt',{highWaterMark: 11});
+rs.setEncoding('utf8');*/
+
+/*// Bufferä¸æ”¯æŒçš„ç¼–ç 
+console.log(Buffer.isEncoding('GBK')); // æµ‹è¯•Bufferæ˜¯å¦æ”¯æŒ'GBK'ç¼–ç 
+
+// è‹¥Bufferä¸æ”¯æŒç¼–ç ï¼Œä½¿ç”¨iconv-liteåº“è¿›è¡Œç¼–ç ç±»å‹è½¬æ¢
+var iconv = require('iconv-lite');
+var buf = new Buffer(" åˆ›å»º","utf8");
+//console.log(buf.toString());
+var str = iconv.decode(buf,'utf8'); // Bufferè½¬å­—ç¬¦ä¸²
+console.log(str);
+var buf = iconv.encode(str,'GBK'); //å­—ç¬¦ä¸²è½¬ Buffer
+console.log(buf.toString());*/
+
+
+/*// Node.jsä¸­çš„ç¼“å†²åŒºæ˜¯å¯¹åŸå§‹å†…å­˜çš„åˆ†é…ï¼Œä»¥ä¾¿äºNode.jså¯¹æ­¤è¯»å†™æ•°æ®
+ var buffer = new Buffer(8);//åˆ›å»ºå¸¦æœ‰8ä¸ªå­—èŠ‚çš„ç¼“å†²åŒº
+ //å¾—åˆ°bufferä¸ºï¼š<Buffer 50 59 40 01 01 00 00 00>
+ //ç¼“å†²åŒºæ‰€ä»£è¡¨çš„æ˜¯è®¡ç®—æœºä¸Šæ‰€åˆ†é…çš„åŸå§‹å†…å­˜ã€‚
+ console.log(buffer);
+ //å¾—åˆ°ï¼š'\u0000 \u0000\u0000\u0000\u0000\u0000\u0000'
+ var buffer = new Buffer([85,86]);//85æ˜¯å­—ç¬¦U
+ console.log(buffer.toString("utf8"));//å°†ç¼–ç ä¼ é€’ç»™ç¼“å†²åŒºï¼Œè¾“å‡ºå­—ç¬¦UV*/
+
+/*// å†™å…¥ç¼“å†²åŒºï¼Œå‘ç¼“å†²åŒºè¿½åŠ æ•°æ®ï¼Œå¤åˆ¶ç¼“å†²åŒºï¼Œä¿®æ”¹ç¼“å†²åŒºä¸­çš„å­—ç¬¦ä¸²
+ // Bufferæ¨¡å—æ²¡æœ‰æä¾›ä¿®æ”¹å­—ç¬¦ä¸²çš„æ–¹æ³•ï¼Œè‹¥æƒ³ä¿®æ”¹ï¼šä½¿ç”¨toString()æ–¹æ³•è¯»ç¼“å†²åŒºï¼Œå¯¹Stringå¯¹è±¡æ‰§è¡Œä¿®æ”¹ï¼Œå°†ä¿®æ”¹åçš„å­—ç¬¦ä¸²å†™ä¼šç¼“å†²åŒº
+ var buffer = new Buffer(8);
+ buffer.write("hi","utf8");//å†™å…¥ç¼“å†²åŒºï¼Œæ§åˆ¶å°ä¸­è¾“å‡º1ï¼Œè¯´æ˜è¯¥ç¼–ç å ç”¨1ä¸ªå­—èŠ‚
+ console.log(buffer.toString());
+ buffer.write(" buffer",2,"utf8");//å‘ç¼“å†²åŒºè¿½åŠ æ•°æ®,2è¡¨ç¤ºåç§»é‡ï¼ˆä»0å¼€å§‹ï¼‰
+ console.log(buffer.toString());//æ§åˆ¶å°è¾“å‡ºhi buffer
+ var buffer2 = new Buffer(8);
+ buffer.copy(buffer2);//å°†bufferå¤åˆ¶ç»™buffer2
+ console.log(buffer2.toString());//æ§åˆ¶å°è¾“å‡ºhi buffer*/
+
+/*
+// æ­£ç¡®çš„æ‹¼æ¥Bufferåº”è¯¥ä½¿ç”¨Buffer.concat()æ–¹æ³•
+var chunks = [];
+var size = 0;
+var fs = require('fs');
+fs.readFile('../data/a.txt',function(err,data){
+	data.on('data',function(chunk){
+		chunks.push(chunk);
+		size += chunk.length;
+	});
+	data.on('end',function(){
+		var buf = Buffer.concat(chunks,size);
+		var str = iconv.decode(buf,'uft8');
+		console.log(str);
+	});
 });
-
-
-/*// Node.jsÖĞµÄ»º³åÇøÊÇ¶ÔÔ­Ê¼ÄÚ´æµÄ·ÖÅä£¬ÒÔ±ãÓÚNode.js¶Ô´Ë¶ÁĞ´Êı¾İ
-var buffer = new Buffer(8);//´´½¨´øÓĞ8¸ö×Ö½ÚµÄ»º³åÇø
-//µÃµ½bufferÎª£º<Buffer 50 59 40 01 01 00 00 00>
-//»º³åÇøËù´ú±íµÄÊÇ¼ÆËã»úÉÏËù·ÖÅäµÄÔ­Ê¼ÄÚ´æ¡£
-console.log(buffer);
-//µÃµ½£º'\u0000 \u0000\u0000\u0000\u0000\u0000\u0000'
-var buffer = new Buffer([85,86]);//85ÊÇ×Ö·ûU
-console.log(buffer.toString("utf8"));//½«±àÂë´«µİ¸ø»º³åÇø£¬Êä³ö×Ö·ûUV*/
-
-/*// Ğ´Èë»º³åÇø£¬Ïò»º³åÇø×·¼ÓÊı¾İ£¬¸´ÖÆ»º³åÇø£¬ĞŞ¸Ä»º³åÇøÖĞµÄ×Ö·û´®
-// BufferÄ£¿éÃ»ÓĞÌá¹©ĞŞ¸Ä×Ö·û´®µÄ·½·¨£¬ÈôÏëĞŞ¸Ä£ºÊ¹ÓÃtoString()·½·¨¶Á»º³åÇø£¬¶ÔString¶ÔÏóÖ´ĞĞĞŞ¸Ä£¬½«ĞŞ¸ÄºóµÄ×Ö·û´®Ğ´»á»º³åÇø
-var buffer = new Buffer(8);
-buffer.write("hi","utf8");//Ğ´Èë»º³åÇø£¬¿ØÖÆÌ¨ÖĞÊä³ö1£¬ËµÃ÷¸Ã±àÂëÕ¼ÓÃ1¸ö×Ö½Ú
-console.log(buffer.toString());
-buffer.write(" buffer",2,"utf8");//Ïò»º³åÇø×·¼ÓÊı¾İ,2±íÊ¾Æ«ÒÆÁ¿£¨´Ó0¿ªÊ¼£©
-console.log(buffer.toString());//¿ØÖÆÌ¨Êä³öhi buffer
-var buffer2 = new Buffer(8);
-buffer.copy(buffer2);//½«buffer¸´ÖÆ¸øbuffer2
-console.log(buffer2.toString());//¿ØÖÆÌ¨Êä³öhi buffer*/
+*/

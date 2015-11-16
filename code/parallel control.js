@@ -1,4 +1,6 @@
-// ²¢ĞĞÍ³¼Æ¶à¸öÎÄ¼ş£¬½«×îÖÕÍ³¼Æ½á¹û·µ»Ø
+// å¼‚æ­¥I/Oé‡‡ç”¨çº¿ç¨‹æ± å’Œé˜»å¡I/Oçš„æ–¹å¼æ¨¡æ‹Ÿï¼Œwindowsæ˜¯IOCPçš„æ–¹å¼ï¼Œå†…éƒ¨ä»ä¸ºçº¿ç¨‹æ± çš„åŸç†
+
+// å¹¶è¡Œç»Ÿè®¡å¤šä¸ªæ–‡ä»¶ï¼Œå°†æœ€ç»ˆç»Ÿè®¡ç»“æœè¿”å›
 var fs = require('fs');
 var fileDir = './data/static/';
 var wordStatic = {};
@@ -10,7 +12,7 @@ fs.readdir(fileDir,function(err,files){
     for(var index in files){
         var task = (function(file){
             return function(){
-                console.log("Í³¼ÆÒ»¸öÎÄ¼ş");
+                console.log("ç»Ÿè®¡ä¸€ä¸ªæ–‡ä»¶");
                 fs.readFile(file,function(err,text){
                     if(err) throw err;
                     console.log("start " + new Date())
@@ -20,9 +22,9 @@ fs.readdir(fileDir,function(err,files){
                 });
             }
         })(fileDir + '/' + files[index]);
-        tasks.push(task); // °ÑËùÓĞº¯Êı¶¼Ìí¼Óµ½º¯Êıµ÷ÓÃÊı×éÖĞ
+        tasks.push(task); // æŠŠæ‰€æœ‰å‡½æ•°éƒ½æ·»åŠ åˆ°å‡½æ•°è°ƒç”¨æ•°ç»„ä¸­
     }
-    for(var task in tasks){ // ¿ªÊ¼Ö´ĞĞËùÓĞÈÎÎñ
+    for(var task in tasks){ // å¼€å§‹æ‰§è¡Œæ‰€æœ‰ä»»åŠ¡
         tasks[task]();
     }
 });
@@ -51,13 +53,14 @@ function checkIfComplete(){
 }
 
 
-/* // ²¢ĞĞÖ´ĞĞÁ÷³Ì£¬ÏÈÊä³ö100£¬È»ºó500£¬×îºó1000
-setTimeout(function () {
-    console.log('1000ms');
-}, 1000);
-setTimeout(function () {
-    console.log('500ms');
-}, 500);
-setTimeout(function () {
-    console.log('100ms');
-}, 100);*/
+/* // å¹¶è¡Œæ‰§è¡Œæµç¨‹ï¼Œå…ˆè¾“å‡º100ï¼Œç„¶å500ï¼Œæœ€å1000
+ setTimeout(function () {
+ console.log('1000ms');
+ }, 1000);
+ setTimeout(function () {
+ console.log('500ms');
+ }, 500);
+ setTimeout(function () {
+ console.log('100ms');
+ }, 100);*/
+

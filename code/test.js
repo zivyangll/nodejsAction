@@ -1,17 +1,17 @@
-// ±àĞ´²âÊÔ£¬µ±¶Ô´úÂë×ö³öĞŞ¸ÄÖ®ºó£¬²»»á¸øÓ¦ÓÃ³ÌĞòÒıÈëĞÂµÄbug¡£
+// ç¼–å†™æµ‹è¯•ï¼Œå½“å¯¹ä»£ç åšå‡ºä¿®æ”¹ä¹‹åï¼Œä¸ä¼šç»™åº”ç”¨ç¨‹åºå¼•å…¥æ–°çš„bugã€‚
 
-// TDD²âÊÔÇı¶¯¿ª·¢£ºÊ×ÏÈ±àĞ´ÃèÊöÁËËûÃÇÏ£Íû³ÌĞòÈçºÎ¹¤×÷µÄ²âÊÔ£¬È»ºó±àĞ´´úÂëÈÃ²âÊÔÍ¨¹ı£ºÔö¼ÓÎÈ¶¨ĞÔ£¬±ãÓÚÖØ¹¹£¬·½±ã¼¯³É
+// TDDæµ‹è¯•é©±åŠ¨å¼€å‘ï¼šé¦–å…ˆç¼–å†™æè¿°äº†ä»–ä»¬å¸Œæœ›ç¨‹åºå¦‚ä½•å·¥ä½œçš„æµ‹è¯•ï¼Œç„¶åç¼–å†™ä»£ç è®©æµ‹è¯•é€šè¿‡ï¼šå¢åŠ ç¨³å®šæ€§ï¼Œä¾¿äºé‡æ„ï¼Œæ–¹ä¾¿é›†æˆ
 
-/*// AssertÄ£¿é£ºÌá¹©ÁËÒ»¸ö»ù´¡µÄ²âÊÔ¿ò¼Ü£¬¶øµÚÈı·½Ä£¿éÔÚassert»ù´¡ÉÏ¸Ä½ø£¬°üÀ¨²âÊÔ±¨¸æ£¬²âÊÔÒì²½´úÂëÒÔ¼°Ê¹ÓÃDBB»òÕßTDD·ç¸ñ²âÊÔ£¬½¨ÒéÊ¹ÓÃ===,¶ø²»ÊÇ==
+/*// Assertæ¨¡å—ï¼šæä¾›äº†ä¸€ä¸ªåŸºç¡€çš„æµ‹è¯•æ¡†æ¶ï¼Œè€Œç¬¬ä¸‰æ–¹æ¨¡å—åœ¨assertåŸºç¡€ä¸Šæ”¹è¿›ï¼ŒåŒ…æ‹¬æµ‹è¯•æŠ¥å‘Šï¼Œæµ‹è¯•å¼‚æ­¥ä»£ç ä»¥åŠä½¿ç”¨DBBæˆ–è€…TDDé£æ ¼æµ‹è¯•ï¼Œå»ºè®®ä½¿ç”¨===,è€Œä¸æ˜¯==
 var assert = require("assert");
-assert.equal("8",8); // ³ÁÄ¬ÊÇ½ğ
-assert.strictEqual("8",8); //Å×³ö´íÎó*/
+assert.equal("8",8); // æ²‰é»˜æ˜¯é‡‘
+assert.strictEqual("8",8); //æŠ›å‡ºé”™è¯¯*/
 
-/*// nodeunitÄ£¿é£ºÊ¹ÓÃnodeunit½øĞĞµ¥Ôª²âÊÔ£¬ÔÚassert»ù´¡ÉÏÌí¼ÓÁË½¨Á¢Óë²ğĞ¶²âÊÔµÄÄÜÁ¦£¬Òì²½²âÊÔÄÜÁ¦£¬mockºÍstubµÄ¹¦ÄÜ¡£°²×°£ºnpm install -g nodeunit ,ÔËĞĞ£ºnodeunit app.js
-exports.firstTest = function(test){//Ã¿¸ö²âÊÔ¶¼ÉùÃ÷³Éexports.testName£¨ÃèÊö£©
-    test.expect(1);//nÎªÆÚÍûµÄ¶ÏÑÔÊı
+/*// nodeunitæ¨¡å—ï¼šä½¿ç”¨nodeunitè¿›è¡Œå•å…ƒæµ‹è¯•ï¼Œåœ¨assertåŸºç¡€ä¸Šæ·»åŠ äº†å»ºç«‹ä¸æ‹†å¸æµ‹è¯•çš„èƒ½åŠ›ï¼Œå¼‚æ­¥æµ‹è¯•èƒ½åŠ›ï¼Œmockå’Œstubçš„åŠŸèƒ½ã€‚å®‰è£…ï¼šnpm install -g nodeunit ,è¿è¡Œï¼šnodeunit app.js
+exports.firstTest = function(test){//æ¯ä¸ªæµ‹è¯•éƒ½å£°æ˜æˆexports.testNameï¼ˆæè¿°ï¼‰
+    test.expect(1);//nä¸ºæœŸæœ›çš„æ–­è¨€æ•°
     test.strictEqual("hello","hello");
-    test.done();//±ÜÃâÍ¨¹ı¼Ù²âÊÔ£¬Íê³ÉÖ®ºóÒ»¶¨Òªµ÷ÓÃtest.done()±íÊ¾²âÊÔÍê³É
+    test.done();//é¿å…é€šè¿‡å‡æµ‹è¯•ï¼Œå®Œæˆä¹‹åä¸€å®šè¦è°ƒç”¨test.done()è¡¨ç¤ºæµ‹è¯•å®Œæˆ
 };
 exports.secendTest = function(test){
     test.expect(1);
@@ -24,19 +24,19 @@ exports.asyncTest = function(test){
         test.expect(2);
         test.strictEqual(err,null);
         test.notStrictEqual(stats.size,0);
-        test.done();//ÈİÒ×Íü¼Ç
+        test.done();//å®¹æ˜“å¿˜è®°
     });
 };*/
 
-// BDD:ĞĞÎªÇı¶¯¿ª·¢£º¿ª·¢´ÓÍâ²¿ÍùÄÚ¿¼ÂÇ³ÌĞò£¬²âÊÔÒÔÓ¦ÓÃ³ÌĞòÓëÀ´×ÔÍâ½çµÄ½»»¥Îª»ù´¡£¬¶ø²»ĞèÒªÀí½âÓ¦ÓÃ³ÌĞòÄÚ²¿Ô­Àí£¬ÓÃ°×»°ÃèÊöÕıÔÚ²âÊÔÊ²Ã´£¬È»ºóÉùÃ÷ÆäÈçºÎ¹¤×÷
+// BDD:è¡Œä¸ºé©±åŠ¨å¼€å‘ï¼šå¼€å‘ä»å¤–éƒ¨å¾€å†…è€ƒè™‘ç¨‹åºï¼Œæµ‹è¯•ä»¥åº”ç”¨ç¨‹åºä¸æ¥è‡ªå¤–ç•Œçš„äº¤äº’ä¸ºåŸºç¡€ï¼Œè€Œä¸éœ€è¦ç†è§£åº”ç”¨ç¨‹åºå†…éƒ¨åŸç†ï¼Œç”¨ç™½è¯æè¿°æ­£åœ¨æµ‹è¯•ä»€ä¹ˆï¼Œç„¶åå£°æ˜å…¶å¦‚ä½•å·¥ä½œ
 
-/*// VowsÄ£¿é£ºÓÃÓÚÒÔBDD·ç¸ñ²âÊÔNode.jsÓ¦ÓÃ³ÌĞò£¬½¨Á¢ÔÚassertÄ£¿éÖ®ÉÏ¡£°²×°£ºnpm install vows --save£¬ÔËĞĞnode app.js£¬Èô²âÊÔÍ¨¹ı£¬ÔòÁĞ³öhonoredÊıÁ¿
+/*// Vowsæ¨¡å—ï¼šç”¨äºä»¥BDDé£æ ¼æµ‹è¯•Node.jsåº”ç”¨ç¨‹åºï¼Œå»ºç«‹åœ¨assertæ¨¡å—ä¹‹ä¸Šã€‚å®‰è£…ï¼šnpm install vows --saveï¼Œè¿è¡Œnode app.jsï¼Œè‹¥æµ‹è¯•é€šè¿‡ï¼Œåˆ™åˆ—å‡ºhonoredæ•°é‡
 var vows = require("vows");
 var assert = require("assert");
-vows.describe("Compare String").addBatch({ // ÃèÊö Description£¬¶Ô²âÊÔµÄÃèÊö
-    "when comparing the same stirngs":{    // ÉÏÏÂÎÄ Context£¬²âÊÔÔËĞĞµÄÉÏÏÂÎÄ
-        topic:"hello",                     // Ö÷Ìâ Topic£¬²âÊÔµÄÊ²Ã´
-        "they should be equal":function(topic){ //Ğû¸æ Vow£¬ÆÚÍûÔÚ²âÊÔÖĞ·¢ÉúÊ²Ã´
+vows.describe("Compare String").addBatch({ // æè¿° Descriptionï¼Œå¯¹æµ‹è¯•çš„æè¿°
+    "when comparing the same stirngs":{    // ä¸Šä¸‹æ–‡ Contextï¼Œæµ‹è¯•è¿è¡Œçš„ä¸Šä¸‹æ–‡
+        topic:"hello",                     // ä¸»é¢˜ Topicï¼Œæµ‹è¯•çš„ä»€ä¹ˆ
+        "they should be equal":function(topic){ //å®£å‘Š Vowï¼ŒæœŸæœ›åœ¨æµ‹è¯•ä¸­å‘ç”Ÿä»€ä¹ˆ
             assert.strictEqual(topic,"lalala");
         }
     },
@@ -48,14 +48,14 @@ vows.describe("Compare String").addBatch({ // ÃèÊö Description£¬¶Ô²âÊÔµÄÃèÊö
     }
 }).run();*/
 
-/*// Ê¹ÓÃvows½øĞĞÒì²½²âÊÔ£º»Øµ÷Ê±ÌØÊâµÄthis.callbackº¯Êı£¬ÔÚËùÓĞµÄVowsÖ÷ÌâÖĞ¾ù¿ÉÓÃ£¬ËüÊ¹»Øµ÷µÄ½á¹û¿ÉÒÔ±»´«µİµ½²âÊÔº¯ÊıÖĞ
+/*// ä½¿ç”¨vowsè¿›è¡Œå¼‚æ­¥æµ‹è¯•ï¼šå›è°ƒæ—¶ç‰¹æ®Šçš„this.callbackå‡½æ•°ï¼Œåœ¨æ‰€æœ‰çš„Vowsä¸»é¢˜ä¸­å‡å¯ç”¨ï¼Œå®ƒä½¿å›è°ƒçš„ç»“æœå¯ä»¥è¢«ä¼ é€’åˆ°æµ‹è¯•å‡½æ•°ä¸­
 var vows   = require("vows");
 var assert = require("assert");
 var fs     = require("fs");
 vows.describe("Async testing").addBatch({
     "When using fs.stat on a file":{
         topic:function(){
-            fs.stat("file.txt",this.callback);//±ØĞëÒªÓĞthis.callback
+            fs.stat("file.txt",this.callback);//å¿…é¡»è¦æœ‰this.callback
         },
         "it should be present": function(err,stat){
             assert.notStrictEqual(err,null);
@@ -66,4 +66,18 @@ vows.describe("Async testing").addBatch({
     }
 }).run();*/
 
+
+/*// æ€§èƒ½æµ‹è¯•
+var http = require('http');
+var helloworld = "";
+for(var i = 0; i < 1024 * 10; i++){
+	helloworld += "a";
+}
+helloworld = new Buffer(helloworld); //ã€€æ€§èƒ½æé«˜ä¸€å€ï¼Œå»ºè®®åªè¯»bufferï¼Œä¸åšé¢å¤–è½¬æ¢
+http.createServer(function(req,res){
+	res.writeHead(200);
+	res.end(helloworld);
+}).listen(8001);
+console.log("åœ¨å‘½ä»¤è¡Œä¸­è¿è¡Œï¼šab -c 200 -t 100 http://127.0.0.1:8001/")
+// é€šè¿‡Apacheçš„ab.exeè¿›è¡Œæ€§èƒ½æµ‹è¯•ï¼Œå‘èµ·200ä¸ªå¹¶å‘å®¢æˆ·ç«¯ï¼Œç›®å½•C:\Program Files\Java\Apache24\bin*/
 
