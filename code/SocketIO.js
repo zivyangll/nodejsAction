@@ -1,27 +1,27 @@
-// ¶¯Ì¬Web¼òÊ·
-// 29ÊÀ¼Í90Äê´úºóÆÚ£¬DHTML£¬ÒıÈëÁË¼òµ¥µÄ¶¯Ì¬¹¦ÄÜ£¬ÃèÊöÁËÓÃ»§ÓëWebÒ³Ãæ½»»¥µÄ·½·¨ÒÔ¼°µ±½»»¥·¢ÉúÊ±»á·¢ÉúÊ²Ã´¡£
-// Ajax£ºÓÃ»§ÎŞĞèË¢ĞÂÒ³Ãæ¾ÍÄÜ´Ó·şÎñÆ÷ÇëÇóÊı¾İ£¬µ«Ïë´Ó·şÎñÆ÷ÍÆ¶¯Êı¾İµ½ä¯ÀÀÆ÷±È½ÏÀ§ÄÑ£¬ÇÒÔÚ²»Í¬ä¯ÀÀÆ÷¹¤×÷·½Ê½²»Í¬,Ã¿´ÎÍ¨ĞÅ¶¼ĞèÒª½¨Á¢Á¬½Ó
-// WebSocket£º·şÎñÆ÷ºÍ¿Í»§¶ËÖ®¼äÊµÏÖË«ÏòÊµÊ±Í¨ĞÅ£¬ÔÚWeb·şÎñÆ÷ºÍä¯ÀÀÆ÷Ö®¼ä±£³ÖÁ¬½Ó³Ö¾Ã´ò¿ª£¬²»Ö§³ÖÖØÁ¬½Ó£¬µ«
-// Socket.IO¿âÌá¹©ÁËÖØÁ¬½Óreconnection handling£¯ĞÄÌøheartbeat¹¦ÄÜ£¬²¢¶ÔÄ³Ğ©¿çä¯ÀÀÆ÷µÄÎÊÌâ½øĞĞÁË³éÏó¡£
+// åŠ¨æ€Webç®€å²
+// 29ä¸–çºª90å¹´ä»£åæœŸï¼ŒDHTMLï¼Œå¼•å…¥äº†ç®€å•çš„åŠ¨æ€åŠŸèƒ½ï¼Œæè¿°äº†ç”¨æˆ·ä¸Webé¡µé¢äº¤äº’çš„æ–¹æ³•ä»¥åŠå½“äº¤äº’å‘ç”Ÿæ—¶ä¼šå‘ç”Ÿä»€ä¹ˆã€‚
+// Ajaxï¼šç”¨æˆ·æ— éœ€åˆ·æ–°é¡µé¢å°±èƒ½ä»æœåŠ¡å™¨è¯·æ±‚æ•°æ®ï¼Œä½†æƒ³ä»æœåŠ¡å™¨æ¨åŠ¨æ•°æ®åˆ°æµè§ˆå™¨æ¯”è¾ƒå›°éš¾ï¼Œä¸”åœ¨ä¸åŒæµè§ˆå™¨å·¥ä½œæ–¹å¼ä¸åŒ,æ¯æ¬¡é€šä¿¡éƒ½éœ€è¦å»ºç«‹è¿æ¥
+// WebSocketï¼šæœåŠ¡å™¨å’Œå®¢æˆ·ç«¯ä¹‹é—´å®ç°åŒå‘å®æ—¶é€šä¿¡ï¼Œåœ¨WebæœåŠ¡å™¨å’Œæµè§ˆå™¨ä¹‹é—´ä¿æŒè¿æ¥æŒä¹…æ‰“å¼€ï¼Œä¸æ”¯æŒé‡è¿æ¥ï¼Œä½†
+// Socket.IOåº“æä¾›äº†é‡è¿æ¥reconnection handlingï¼å¿ƒè·³heartbeatåŠŸèƒ½ï¼Œå¹¶å¯¹æŸäº›è·¨æµè§ˆå™¨çš„é—®é¢˜è¿›è¡Œäº†æŠ½è±¡ã€‚
 var http = require("http");
 var fs    = require("fs");
 var server = http.createServer(function(req,res){
-    fs.readFile("./socketTest.html",function(error,data){ // ÉèÖÃ¿Í»§¶ËÍøÒ³
-        res.writeHead(200,{"Content.Type":"text/html"});
-        res.end(data,"utf-8");
-    })
+	fs.readFile("./socketTest.html",function(error,data){ // è®¾ç½®å®¢æˆ·ç«¯ç½‘é¡µ
+		res.writeHead(200,{"Content.Type":"text/html"});
+		res.end(data,"utf-8");
+	})
 }).listen(3000,"127.0.0.1");
 console.log('server running at  http://127.0.0.1:3000');
-var io = require("socket.io").listen(server);//½«Socket.IO°ó¶¨µ½·şÎñÆ÷£¬¿ÉÒÔÕìÌıÊÂ¼ş
-io.sockets.on("connection",function(socket){//ÕìÌıÁ¬½ÓÊÂ¼ş,×¢ÒâsocketsºÍsocket
-    console.log("User connected");
-    socket.emit("message",{text:"you hava receive message from server!"});//´Ó·şÎñÆ÷½«Êı¾İ·¢ËÍ¸øµ¥¸ö¿Í»§µÄ
-    // socket.broadcast.emit("message",{text:"you hava receive message from server!"});//¸øÒÑÁ¬½ÓµÄ¿Í»§¶Ë·¢ËÍÊı¾İ
+var io = require("socket.io").listen(server);//å°†Socket.IOç»‘å®šåˆ°æœåŠ¡å™¨ï¼Œå¯ä»¥ä¾¦å¬äº‹ä»¶
+io.sockets.on("connection",function(socket){//ä¾¦å¬è¿æ¥äº‹ä»¶,æ³¨æ„socketså’Œsocket
+	console.log("User connected");
+	socket.emit("message",{text:"you hava receive message from server!"});//ä»æœåŠ¡å™¨å°†æ•°æ®å‘é€ç»™å•ä¸ªå®¢æˆ·çš„
+	// socket.broadcast.emit("message",{text:"you hava receive message from server!"});//ç»™å·²è¿æ¥çš„å®¢æˆ·ç«¯å‘é€æ•°æ®
 
-    socket.on("disconnect",function(){//ÕìÌı¶Ï¿ªÁ¬½ÓÊÂ¼ş
-        console.log("User disconnected!");
-    });
-    socket.on("fromClient",function(data){
-        console.log(data.text);
-    });
+	socket.on("disconnect",function(){//ä¾¦å¬æ–­å¼€è¿æ¥äº‹ä»¶
+		console.log("User disconnected!");
+	});
+	socket.on("fromClient",function(data){
+		console.log(data.text);
+	});
 });
