@@ -1,42 +1,42 @@
-//JSON:JavaScript¶ÔÏó±ê¼Ç£ºÇáÁ¿¼¶µÄÊı¾İ½»»»¸ñÊ½£¬ÓÉDouglas Crockford·¢Ã÷¡£
-//JSONµÄ¼üÖµ¶ÔÓÃ¶ººÅ·Ö¿ª£¬¼üÖµ¶Ô¿ÉÒÔÇ¶Ì×£¬´´½¨¸üÎª¸´ÔÓµÄÊı¾İ½á¹¹¡£¼üÖµ¶Ô±ØĞèÎ»ÓÚË«ÒıºÅÄÚ²ÅÓĞĞ§¡£{"name":"yll","age":"22"}
+//JSON:JavaScriptå¯¹è±¡æ ‡è®°ï¼šè½»é‡çº§çš„æ•°æ®äº¤æ¢æ ¼å¼ï¼Œç”±Douglas Crockfordå‘æ˜ã€‚
+//JSONçš„é”®å€¼å¯¹ç”¨é€—å·åˆ†å¼€ï¼Œé”®å€¼å¯¹å¯ä»¥åµŒå¥—ï¼Œåˆ›å»ºæ›´ä¸ºå¤æ‚çš„æ•°æ®ç»“æ„ã€‚é”®å€¼å¯¹å¿…éœ€ä½äºåŒå¼•å·å†…æ‰æœ‰æ•ˆã€‚{"name":"yll","age":"22"}
 
-/*//Ê¹ÓÃNode.jsÍ¨¹ıJSON·¢ËÍÊı¾İ·şÎñ£¬±ØĞë½«Í·HeaderÉèÖÃÎªapplication/json,ÆÕÍ¨µÄÎªtext/plain,ÉèÖÃÎªapplication/text»áÏÂÔØÎÄ±¾¡£
-var http = require("http");
-http.createServer(function(req,res){
-    res.writeHead(200,{"Content-Type":"application/json"});
-    res.end('{"name":"yll","age":"22","home":"huozhou"}');
-}).listen(3000,"127.0.0.1");
-console.log("Server is running at 'http://127.0.0.1:3000'");*/
+/*//ä½¿ç”¨Node.jsé€šè¿‡JSONå‘é€æ•°æ®æœåŠ¡ï¼Œå¿…é¡»å°†å¤´Headerè®¾ç½®ä¸ºapplication/json,æ™®é€šçš„ä¸ºtext/plain,è®¾ç½®ä¸ºapplication/textä¼šä¸‹è½½æ–‡æœ¬ã€‚
+ var http = require("http");
+ http.createServer(function(req,res){
+ res.writeHead(200,{"Content-Type":"application/json"});
+ res.end('{"name":"yll","age":"22","home":"huozhou"}');
+ }).listen(3000,"127.0.0.1");
+ console.log("Server is running at 'http://127.0.0.1:3000'");*/
 
-/*// ½«javaScript¶ÔÏóobj×ª»»ÎªJSON×Ö·û´®:JSON.stringify(obj)
-// ½«Json×Ö·û´®×ª»»ÎªJSON¶ÔÏó£ºJSON.parse(json)
-var obj = {
-    name:"yll",
-    age :"22"
-};
-myJsonString = JSON.stringify(obj);//½«javaScript¶ÔÏóobj×ª»»ÎªJSON×Ö·û´®
-console.log(myJsonString);//Êä³ö{"name":"yll","age":"22"} ×Ö·û´®
-myJsonObj = JSON.parse(myJsonString);//½«Json×ª»»ÎªJSON¶ÔÏó
-console.log(myJsonObj.age); //Êä³ö22*/
+/*// å°†javaScriptå¯¹è±¡objè½¬æ¢ä¸ºJSONå­—ç¬¦ä¸²:JSON.stringify(obj)
+ // å°†Jsonå­—ç¬¦ä¸²è½¬æ¢ä¸ºJSONå¯¹è±¡ï¼šJSON.parse(json)
+ var obj = {
+ name:"yll",
+ age :"22"
+ };
+ myJsonString = JSON.stringify(obj);//å°†javaScriptå¯¹è±¡objè½¬æ¢ä¸ºJSONå­—ç¬¦ä¸²
+ console.log(myJsonString);//è¾“å‡º{"name":"yll","age":"22"} å­—ç¬¦ä¸²
+ myJsonObj = JSON.parse(myJsonString);//å°†Jsonè½¬æ¢ä¸ºJSONå¯¹è±¡
+ console.log(myJsonObj.age); //è¾“å‡º22*/
 
-// µ÷ÓÃµÚÈı·½API£¬·µ»ØJSONÊı¾İ½øĞĞ½âÎö
+// è°ƒç”¨ç¬¬ä¸‰æ–¹APIï¼Œè¿”å›JSONæ•°æ®è¿›è¡Œè§£æ
 var http = require("http");
 var data = "";
 var options = {
-    host:"ip.taobao.com",
-    path:"/service/getIpInfo.php?ip=63.223.108.42"
+	host:"ip.taobao.com",
+	path:"/service/getIpInfo.php?ip=63.223.108.42"
 };
 var request = http.get(options,function(res){
-    res.on("data",function(chunk){
-        console.log(chunk.toString())
-        data += chunk.toString();
-    });
-    res.on("end",function(){
-        ipdata = JSON.parse(data);
-        console.log('the ip is come from :' + ipdata.data.country);
-    });
-    res.on("error",function(err){
-        console.log("there was an error: " + err.message);
-    })
+	res.on("data",function(chunk){
+		console.log(chunk.toString())
+		data += chunk.toString();
+	});
+	res.on("end",function(){
+		ipdata = JSON.parse(data);
+		console.log('the ip is come from :' + ipdata.data.country);
+	});
+	res.on("error",function(err){
+		console.log("there was an error: " + err.message);
+	})
 });
