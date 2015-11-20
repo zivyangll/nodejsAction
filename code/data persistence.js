@@ -1,4 +1,4 @@
-/*// 将数据写入文件
+/*// ------------------------------将数据写入文件------------------------------
 // 场景：备份数据、储存时间戳、记录PID、记录日志
 // 若文件不存在，fs.writeFile将自动创建文件,若不提供编码，则会返回原始的缓冲区内容,
 var fs = require("fs");
@@ -11,12 +11,12 @@ fs.writeFile("file.txt",data,"utf8",function(err){
     }
 });*/
 
-/*// 使用环境变量存储小数据
+/*// ------------------------------使用环境变量存储小数据------------------------------
 // 例如连接字符串的细节、用户名和密码、数据库设置等
 console.log(process.env.PATH) //获取了系统环境变量的PATH值*/
 
 
-// 使用PostgreSQL保存数据
+//------------------------------ 使用PostgreSQL保存数据------------------------------
 /*
 CREATE TABLE "testTable"(
     "number" serial NOT NULL,
@@ -60,7 +60,7 @@ client.connect(function(error, results) {
 });
 */
 
-// 使用MongoDB保存数据
+/*// ------------------------------使用MongoDB保存数据------------------------------
 // 安装“mongodb-win32-i386-3.0.6”
 // 连接数据库
 var mongoose = require('mongoose');
@@ -78,3 +78,29 @@ db.once('open', function (callback) {
 // 写入数据库
 
 // 删除数据库
+*/
+
+
+/* // --------------------------Redis----------------------------------
+// 安装https://github.com/MSOpenTech/redis/releases，运行C:\Program Files\Java\redis>redis-server.exe
+var redis = require("redis");
+var client = require('redis').createClient();
+
+client.on('error', function (err) {
+	console.log('Error ' + err);
+});
+client.on('ready',function(err){ // 连接成功
+	console.log('ready');
+});
+
+client.set('string key', 'string val', redis.print);
+client.hset('hash key', 'hashtest 1', 'some value', redis.print);
+client.hset(['hash key', 'hashtest 2', 'some other value'], redis.print);
+
+client.hkeys('hash key', function (err, replies) {
+	console.log(replies.length + ' replies:');
+	replies.forEach(function (reply, i) {
+		console.log('    ' + i + ': ' + reply);
+	});
+	client.quit();
+}); */
