@@ -30,28 +30,3 @@ http.createServer(function (require, response) {
 }).listen(3000, '192.168.2.113'); // or listen(3000,'127.0.0.1');
 
 console.log("Server running at http://192.168.2.113:3000/");
-
-/*
-
-var xmlHttp;
-function createxmlHttpRequest() {
-	if (window.ActiveXObject) {
-		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	} else if (window.XMLHttpRequest) {
-		xmlHttp = new XMLHttpRequest();
-	}
-}
-function doGet(url) {
-	createxmlHttpRequest();
-	xmlHttp.open("GET", url);
-	xmlHttp.send(null);
-	xmlHttp.onreadystatechange = function () {
-		if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
-			alert('success');
-		} else {
-			alert('fail');
-		}
-	}
-}
-doGet("http://192.168.2.113:3000/")
-*/

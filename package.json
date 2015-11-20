@@ -13,6 +13,7 @@
     "backbone": "^1.2.3",
     "bootstrap": "^3.3.5",
     "express": "^4.13.3",
+    "express-generator": "^4.13.1",
     "iconv-lite": "^0.4.13",
     "jquery": "^2.1.4",
     "mongoose": "^4.2.5",
