@@ -1,0 +1,15 @@
+extends layout
+block content
+    h1 New task view
+
+    form(method='post', action='/tasks')
+        fieldset
+            legend Add a task
+            div.clearfix
+                label Task
+                div.input
+                    // 结果为mytaskinstance[task]='我输入的任务'，并将其解析为json
+                    input(name='mytaskinstance[task]',class='xlarge')
+                div.actions
+                    input(type='submit', value='Save', class='btn btn-primary')
+                    button(type='reset', class='btn btn-primary') Cancle

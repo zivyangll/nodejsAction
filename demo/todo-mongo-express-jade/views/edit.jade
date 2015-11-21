@@ -1,0 +1,13 @@
+extends layout
+block content
+    h1 Edit task view
+    form(method='post', action='/tasks/' + task.id)
+        fieldset
+            legend Editing task
+            div.clearfix
+                label Task
+                div.input
+                    input(name='mytaskinstance[task]', class='xlarge', value='#{task.task}')
+                div.actions
+                    input(type='submit', value='Save', class='btn btn-primary')
+                    button(type='reset', class='btn btn-primary') Cancel
