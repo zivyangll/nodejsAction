@@ -4,6 +4,7 @@ var url = require('url');
 var conString = "tcp://postgres:admin@localhost:5432/movie"; // 连接字符串="tcp:// 用户名 : 密码 @localhost:5432/ 库名";
 var client = new pg.Client(conString);
 var movies = null;
+var individual = require('./individual');
 
 // 连接数据库
 client.connect(function (error, results) {
@@ -45,17 +46,19 @@ function queryConnectionHandler(req, res) {
 				body += data;
 			});
 			req.on('end', function () {
-				console.log("Body: " + body);
+				//console.log("Body: " + body);
+				var result = individual.getIndividualMoives(JSON.parse(body));
+				//console.log(result);
+
+				var sqlString = individual.getSql(result,0,100);
+				console.log(sqlString);
+				client.query(sqlString, function (err, result) {
+					movies = JSON.stringify(result.rows);
+					res.end(movies);
+					//console.log(JSON.parse(movies));
+				});
 			});
 		}
-		// 查询数据库
-		var summaryNum = Number.parseInt(to) - Number.parseInt(from) + 1;
-		client.query("select * from \"movie\" where douban_movie_lookedman>100000 order by douban_movie_lookedman desc limit " + summaryNum + " offset  " + from, function (err, result) {
-			//console.log(result.rows);
-			movies = JSON.stringify(result.rows);
-			console.log('查询一次');
-			res.end(movies);
-		});
 	}
 }
 server.listen(3000, '192.168.2.113'); // or listen(3000,'127.0.0.1');

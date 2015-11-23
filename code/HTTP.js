@@ -11,19 +11,115 @@ var http = require('http');
 http.createServer(function (require, response) {
 	response.writeHead(200, {'Content-Type': 'text/plain'});
 	response.write('kaitou');
-	response.end('Hello World\n');
+	response.end('Hello World\n'); // 结束该响应
 }).listen(3000); // or listen(3000,'127.0.0.1');
 console.log("Server running at http://localhost:3000/");*/
 
 /*//--------------------------------- 创建web服务器，方式二---------------------------------
 var http = require('http');
 var server = http.createServer();
-server.on('request', function (req, res) {
-	res.writeHead(200, {'Content-Type': 'text/plain'});
-	res.end('Hello World');
+server.on('request', function (req, res) {// res.set*在前，res.write*在后，res.end最后
+	switch (req.method) {
+		case 'POST':
+			req.setEncoding('utf8'); // 设置了编码之后，chunk不再是buffer对象，而是utf8字符串
+			var item = '';
+			req.on('data', function (chunk) { // 监听请求发送过来的数据
+				item += chunk;  // 数据块默认是个buffer对象
+			});
+			req.on('end', function () { // 数据全部读完之后触发end事件
+				console.log(item);
+				res.end('Hello World');
+			});
+			break;
+		case 'GET':
+			var data = new Buffer('jsdl sj sdfs fsdfsdjfsdf jfjsdlfs jfsdfj slkfjsdlf sdf fsdfsjdlkfsdf');
+			res.setHeader('myData', 'form yll'); // 设置响应头
+				res.setHeader('Content-length',Buffer.byteLength(data)); // 设置响应头长度，22个字符
+			//res.statusCode = 302;                 // 设置响应码
+			//res.setHeader('Location','http://www.baidu.com'); // 设置响应头
+			res.writeHead(500, {'Content-Type': 'text/plain; charset = "utf-8"'}); // 设置响应头，一次性写入，之后不能再修改，在Content-Type中设置编码
+			res.end(data);
+			break;
+		case 'DELETE':
+			var path = url.parse(req.url).pathname;
+			var i = parserInt(path.slice(1),10);
+			if(isNaN(i)){
+				res.statusCode = 400;
+				res.end('Invalid item id');
+			} else if( i%2 != 1 ){
+				res.statusCode = 404;
+				res.end('Item not found');
+			} else{
+				console.log('get i:' + i);
+				res.end('ok\n');
+			}
+	}
 });
 server.listen(3000);
-console.log("Server running at http://localhost:3000/");*/
+console.log("Server running at http://localhost:3000/");
+console.log("curl http://localhost:3000 -d 'from post'");*/
+
+/*//--------------------------------- 创建静态文件服务器---------------------------------
+var http = require('http');
+var parse = require('url').parse;
+var join = require('path').join;
+var fs = require('fs');
+var root = __dirname;
+
+var server = http.createServer(function(req,res){
+	var url = parse(req.url);
+	var path = join(root,url.pathname);
+	res.setHeader('content-type', 'text/html;charset=utf8');
+	//----------------------方式1 -----------------------------------
+	fs.stat(path,function(err,stat){ // fs.stat()获取文件相关信息，如大小，修改时间，错误码
+		if(err){
+			if(err.code == 'ENOENT'){
+				res.statusCode = 404;
+				res.end('Item not found');
+			} else{
+				res.statusCode = 500;
+				res.end('Internal Server Error!');
+			}
+		}else{
+			res.setHeader('Content-Length', stat.size);
+			var stream = fs.createReadStream(path);
+			stream.pipe(res); // 读入流.pipe(写入流);
+			stream.on('error',function(err){ // 不加异常处理，当路径不对则服务会被错误搞垮
+				res.statusCode = 500;
+				res.end('Internal Server Error!');
+			})
+		}
+	});
+
+	//----------------------方式2 -----------------------------------
+	//var stream = fs.createReadStream(path);
+	//stream.pipe(res); // 读入流.pipe(写入流);
+	//stream.on('data',function(chunk){ // 将文件数据写入响应中
+	//	res.write(chunk);
+	//});
+	//stream.on('end',function(){
+	//	res.end(); // 文件写完后结束响应
+	//});
+	//stream.on('error',function(err){ // 不加异常处理，当路径不对则服务会被错误搞垮
+	//	res.statusCode = 500;
+	//	res.end('Internal Server Error!');
+	//})
+});
+server.listen(4000);*/
+
+/*//--------------------------------- 创建HTTPS服务器---------------------------------
+// 生成私钥文件：openssl genrsa 1024 > key.pem
+// 通过私钥创建证书： openssl req -x509 -new -key key.pem > key-cert.pem
+var https = require('https');
+var fs = require('fs');
+var options = {   // 作为配置项的ssl私钥与证书
+	key: fs.readFileSync('./key.pem'),  // 同步版的fs.readFile();
+	cert: fs.readFileSync('./key-cert.pem')
+};
+https.createServer(options, function(req,res){ // https模块与http模块的接口基本一致
+	res.writeHead(200);
+	res.end('Hello world\n');
+}).listen(300);*/
 
 // 使用URL模块响应不同的请求
 
@@ -450,35 +546,6 @@ var handle = function(req,res){
 		}
 	});
 };*/
-
-/*//使用node发送邮件
-var nodemailer = require("nodemailer");
-// 开启一个 SMTP 连接池
-var smtpTransport = nodemailer.createTransport("SMTP",{
-	host: "smtp.qq.com", // 主机
-	secureConnection: true, // 使用 SSL
-	port: 465, // SMTP 端口
-	auth: {
-		user: "594043140@qq.com", // 账号
-		pass: "13754956538..." // 密码
-	}
-});
-// 设置邮件内容
-var mailOptions = {
-	from: "Fred Foo <594043140@qq.com>", // 发件地址
-	to: "594043140@qq.com", // 收件列表
-	subject: "Hello world", // 标题
-	html: "<b>thanks a for visiting!</b> 世界，你好！" // html 内容
-}
-// 发送邮件
-smtpTransport.sendMail(mailOptions, function(error, response){
-	if(error){
-		console.log(error);
-	}else{
-		console.log("Message sent: " + response.message);
-	}
-	smtpTransport.close(); // 如果没用，关闭连接池
-});*/
 
 
 
