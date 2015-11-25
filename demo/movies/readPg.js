@@ -1,3 +1,14 @@
+/*删除douban_movie_score字段为NULL的记录
+DELETE FROM movie WHERE douban_movie_score='NULL'
+选择好电影
+select * from movie where douban_movie_lookedman>100000 and cast(douban_movie_score as real)>9
+
+删除douban_movie_name重复的列（年份是连续的两个）
+delete from movie where douban_movie_id in (select douban_movie_id from movie
+where douban_movie_name in
+(select douban_movie_name from movie
+group by douban_movie_name having count(douban_movie_name) > 1) and cast(douban_movie_year as int)%2=1)*/
+
 var pg = require('pg');
 var http = require('http');
 var url = require('url');
