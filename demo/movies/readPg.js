@@ -43,7 +43,6 @@ function queryConnectionHandler(req, res) {
 		var num = args.query.num || 0;//获得参数num
 		// 查询数据库
 		client.query("select * from \"movie\" where douban_movie_lookedman>100000 order by random() limit " + num, function (err, result) {
-			//console.log(result.rows);
 			movies = JSON.stringify(result.rows);
 			res.end(movies);
 		});
@@ -61,7 +60,7 @@ function queryConnectionHandler(req, res) {
 				var result = individual.getIndividualMoives(JSON.parse(body));
 				//console.log(result);
 
-				var sqlString = individual.getSql(result,0,100);
+				var sqlString = individual.getSql(result,0,150);
 				console.log(sqlString);
 				client.query(sqlString, function (err, result) {
 					movies = JSON.stringify(result.rows);
@@ -70,6 +69,17 @@ function queryConnectionHandler(req, res) {
 				});
 			});
 		}
+	}
+	if (pathname == '/daily') { //
+		var num = args.query.num || 0;//获得参数num
+		var mood = args.query.mood || '开心';
+		var sqlString = individual.getDailySql(mood,130);
+		// 查询数据库
+		client.query(sqlString, function (err, result) {
+			movies = JSON.stringify(result.rows);
+			res.end(movies);
+			//console.log(JSON.parse(movies));
+		});
 	}
 }
 server.listen(3000, '192.168.2.113'); // or listen(3000,'127.0.0.1');

@@ -89,12 +89,12 @@ var maxArray = function(myArray){ // 取得最大值
 		else if (myArray[i] == intArray[1]){
 			result.push(i);
 		}
-		else if (myArray[i] == intArray[2]){
-			result.push(i);
-		}
-		else if (myArray[i] == intArray[3]){
-			result.push(i);
-		}
+		//else if (myArray[i] == intArray[2]){
+		//	result.push(i);
+		//}
+		//else if (myArray[i] == intArray[3]){
+		//	result.push(i);
+		//}
 	}
 	return result;
 };
@@ -127,3 +127,29 @@ function unique(arr){  // 去重
 //		});
 //	}
 //});
+
+module.exports.getDailySql = function(mood,num){
+//var getDailySql = function(mood,num){
+	if(mood == "开心" || mood == "幸福" || mood == "快乐"){
+		mood = "晴阳美亮好漂丽佳谐富兴愉喜悦福"
+	} else if(mood == "犹豫" || mood == "忧郁" || mood == "彷徨" || mood == "伤心" || mood == "矛盾"){
+		mood = "雾霾阴忧郁销魂挠苦愁痛撕裂叹哎闷伤犹豫彷徨伤心"
+	} else if(mood == "痛苦" || mood == "烦恼" || mood == "失落" || mood == "不爽" || mood == "愁闷" || mood == "嫉妒"){
+		mood = "雾雨泪血风淋浴痛苦烦恼愁闷嫉妒"
+	}else if(mood == "恐惧" || mood =="龌龊" || mood == "贪婪"){
+		mood = "鬼魂恐惧黑暗尸鞭蜈蚣虫怖"
+	}else if(mood =="懒惰" || mood =="淫欲" || mood =="愤怒" || mood =="绝望"){
+		mood = "害怕淫欲色情黄裸女虐杀抢"
+	}else if(mood == "平和" || mood =="坚定"  || mood =="骄傲" ){
+		mood = "平和鸽坚定骄傲持久笃"
+	}else{
+		mood = "美好"
+	}
+	var moodArray = mood.split('');
+	var sqlString = "select * from \"movie\" where douban_movie_lookedman > 1000  and (";
+	for(var i = 0; i < moodArray.length; i++){
+		sqlString += "douban_movie_name like \'%"+ moodArray[i] +"%\' or \n";
+	}
+	sqlString = sqlString.substr(0,sqlString.length-4) + ") order by douban_movie_lookedman desc  limit " + num + " offset 0";
+	return sqlString;
+};
