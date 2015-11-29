@@ -153,3 +153,13 @@ module.exports.getDailySql = function(mood,num){
 	sqlString = sqlString.substr(0,sqlString.length-4) + ") order by douban_movie_lookedman desc  limit " + num + " offset 0";
 	return sqlString;
 };
+
+module.exports.getThemeSql = function(num,myear,mtype,mlanguage,mscore){
+	var sqlString = "select * from \"movie\" where douban_movie_lookedman > 10  and ";
+	sqlString += "douban_movie_year like \'%"+ myear +"%\' and ";
+	sqlString += "douban_movie_class like \'%"+ mtype +"%\' and ";
+	sqlString += "douban_movie_language like \'%"+ mlanguage +"%\' and ";
+	sqlString += "CAST(douban_movie_score AS double precision) > "+ mscore ;
+	sqlString += " order by douban_movie_lookedman desc  limit " + num + " offset 0";
+	return sqlString;
+};

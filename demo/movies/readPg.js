@@ -81,6 +81,19 @@ function queryConnectionHandler(req, res) {
 			//console.log(JSON.parse(movies));
 		});
 	}
+	if (pathname == '/theme') { //
+		var num = args.query.num || 0;//获得参数num
+		var myear = args.query.myear || '2014'; // 年代
+		var mtype = args.query.mtype || '喜剧'; // 主题
+		var mlanguage = args.query.mlanguage || '普通话';// 语言
+		var mscore = args.query.mscore || '7';// 评分
+		var sqlString = individual.getThemeSql(130,myear,mtype,mlanguage,mscore);
+		// 查询数据库
+		client.query(sqlString, function (err, result) {
+			movies = JSON.stringify(result.rows);
+			res.end(movies);
+		});
+	}
 }
 server.listen(3000, '192.168.2.113'); // or listen(3000,'127.0.0.1');
 
