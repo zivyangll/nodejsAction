@@ -94,6 +94,17 @@ function queryConnectionHandler(req, res) {
 			res.end(movies);
 		});
 	}
+	if (pathname == '/themeone') { //
+		var num = args.query.num || 0;//获得参数num
+		var mtype = args.query.mtype || '喜剧'; // 主题
+		var sqlString = individual.getThemeOneSql(num,mtype);
+		// 查询数据库
+		console.log(sqlString)
+		client.query(sqlString, function (err, result) {
+			movies = JSON.stringify(result.rows);
+			res.end(movies);
+		});
+	}
 }
 server.listen(3000, '192.168.2.113'); // or listen(3000,'127.0.0.1');
 

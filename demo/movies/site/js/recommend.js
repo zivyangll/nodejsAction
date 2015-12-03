@@ -83,6 +83,7 @@ function judgingdot(){
 }
 function pagingReady(count){ //生成分页栏，传入参数count最大页数
     var pagination = $(".paginations");
+	pagination.html("");
     $("<li id='First' href='#' aria-label='Previous'><span aria-hidden='true'>首页</span></li>").appendTo(pagination);
     $("<li id='Previous' href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></li>").appendTo(pagination);
     $("<li id='morefirst' herf='#' style='display:none'><span>&nbsp;...&nbsp;</span></li>").appendTo(pagination);

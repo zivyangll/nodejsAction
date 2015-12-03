@@ -163,3 +163,9 @@ module.exports.getThemeSql = function(num,myear,mtype,mlanguage,mscore){
 	sqlString += " order by douban_movie_lookedman desc  limit " + num + " offset 0";
 	return sqlString;
 };
+module.exports.getThemeOneSql = function(num,mtype){
+	var sqlString = "select * from \"movie\" where douban_movie_lookedman > 10  and ";
+	sqlString += "douban_movie_class like \'%"+ mtype +"%\' ";
+	sqlString += " order by douban_movie_lookedman desc  limit " + num + " offset 0";
+	return sqlString;
+};
