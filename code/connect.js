@@ -228,7 +228,7 @@ connect()
 
 // 实现hello组件：匹配'/hello'
 function hello(req, res, next){
-	if(req.url.match(/^\/hello/)){  
+	if(req.url.match(/^\/hello/)){
 		res.end('hello world\n');
 	}else{
 		next();
