@@ -236,6 +236,51 @@ function hello(req, res, next){
 }
 
 // 实现users中间件：在数据库中搜索用户
+var db = {
+	users: [
+		{ name: 'tobi' },
+		{ name: 'loki' },
+		{ name: 'jane' }
+	]
+};
+function users(req, res, next){
+	var match = req.url.match(/^\/user\/(.+)/);
+	if(match){
+		var user = db.users[match[1]];
+		if(user){ // 判断用户是否存在
+			res.setHeader('Content-Type', 'application/json');
+			res.end(JSON.stringify(user));
+		}else{
+			var err = new Error('User not found');
+			err.notFound = true;
+			next(err);
+		}
+	}else{
+		next();
+	}
+}
 
+// 实现pets中间组件
+function pets(req, res, next){
+	if(req.url.match(/^\/pet\/(.+)/)){
+		foo(); // 未定义的foo()函数会触发异常，但是不会有err.notFound属性
+	}else{
+		next();
+	}
+}
 
+// 实现errorHandler中间件，带有上下文信息的错误消息
+function errorHandler(err, req, res, next){
+	console.error(err.stack);
+	res.setHeader('Content-Type', 'application/json');
+	if(err.notFound){
+		res.statusCode = 404;
+		res.end(JSON.stringify({error: err.message}));
+	}else{
+		res.statusCode = 500;
+		res.end(JSON.stringify({error: 'Internal Server Error'}));
+	}
+}
+
+// 实现errorPage中间件
 

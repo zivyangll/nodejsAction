@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>avalon by RubyLouvre</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="avalon.js"></script>
+    <script>
+        var model = avalon.define({
+            $id: "mobile",
+            phone: ""
+        })
+        model.$watch("phone", function(a) {
+            var b = a.replace(/\s+/g, "")
+            var array = b.split("")
+            var ret = ""
+            for (var i = 0, n = array.length; i < n; i++) {
+                if (i > 10) //不能超过11位
+                    break
+                if (i == 3) {
+                    ret += " "
+                }
+                if (i == 7) {
+                    ret += " "
+                }
+                ret += array[i]
+            }
+            model.phone = ret
+        })
+    </script>
+</head>
+
+<body>
+<div ms-controller="mobile">
+    <input ms-duplex="phone" />
+</div>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>$watch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="../avalon.js"></script>
+    <script>
+        var model = avalon.define({
+            $id: "$watch1",
+            prop: "xxx",
+            array: ["aaa", "bbb", "ccc", "ddd"],
+            data: {
+                aaa: "lll"
+            },
+            propWatch: "",
+            arrayWatch: 4,
+            dataAAAWatch: "",
+            click: function() {
+                model.prop = new Date - 1
+                model.data.aaa = new Date - 2
+                model.array.push(new Date - 3)
+            }
+        })
+        model.$watch("prop", function(a) {
+            model.propWatch = a + " $watch"
+        })
+
+        //在avalon.define外面绑定$watch回调
+        model.$watch("array.length", function(a) {
+            model.arrayWatch = a + " $watch"
+        })
+        model.$watch("data.aaa", function(a) {
+            model.dataAAAWatch = a + " $watch"
+        })
+    </script>
+</head>
+
+<body>
+<div ms-controller="$watch1">
+    <p>prop: {{prop}} --> propWatch: {{propWatch}}</p>
+    <p>array.length: {{array.size()}} --> arrayWatch: {{arrayWatch}}</p>
+    <p>data.aaa: {{data.aaa}} --> dataAAAWatch: {{dataAAAWatch}}</p>
+    <p>
+        <button ms-click="click" type="button">点我</button>
+    </p>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Avalon by RubyLouvre</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="avalon.js"></script>
+
+    <script>
+        avalon.define({
+            $id: "test",
+            string: "xxx",
+            bool: true,
+            number: 100,
+            object: {
+                ddd: "aaa",
+                bbb: "bbb"
+            }
+        });
+        avalon.define({
+            $id: "yllTest",
+            name: "杨龙龙"
+        })
+    </script>
+</head>
+
+<body>
+<div ms-controller="test">
+    <input ms-duplex="string">{{string}}
+    <input ms-duplex="bool" type="radio">{{bool}}
+    <input ms-duplex="number">{{number}}
+    <ul>
+        <li ms-repeat="object">{{$key}} --> {{$val}}</li>
+    </ul>
+</div>
+<div ms-controller="yllTest">
+    <input ms-duplex="name"> {{::name}} <!--单次绑定-->
+</div>
+</body>
+
+</html>

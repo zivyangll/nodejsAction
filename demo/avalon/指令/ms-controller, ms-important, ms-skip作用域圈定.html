@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../avalon.js"></script>
+    <style>
+        /*避免未经处理的原始模板内容在页面载入时在页面中一闪而过*/
+        .ms-controller,.ms-important, [ms-controller], [ms-important] {
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        avalon.ready(function() {
+            avalon.define({
+                $id: "AAA",
+                name: "liger",
+                color: "green"
+            });
+            avalon.define({
+                $id: "BBB",
+                name: "sphinx",
+                color: "red"
+            });
+            avalon.define({
+                $id: "CCC",
+                name: "dragon" //不存在color
+            });
+            avalon.define({
+                $id: "DDD",
+                name: "sirenia" //不存在color
+            });
+            avalon.define({
+                $id: "EEE",
+                name: "yll", //不存在color
+                color: "red"
+            });
+            avalon.scan()
+        })
+    </script>
+</head>
+<body>
+<!--作用域采取就近原则-->
+<div ms-controller="AAA">
+    <div>{{name}} : {{color}}</div>
+    <div ms-controller="BBB">
+        <div>{{name}} : {{color}}</div>
+        <div ms-controller="CCC">
+            <div>{{name}} : {{color}}</div>
+        </div>
+        <!--ms-important不会向上查找。-->
+        <div ms-important="DDD">
+            <div>{{name}} : {{color}}</div>
+        </div>
+        <!--ms-skip注明这块区域不应用任何的ViewModel的属性-->
+        <div ms-skip="EEE">
+            <div>{{name}} : {{color}}</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

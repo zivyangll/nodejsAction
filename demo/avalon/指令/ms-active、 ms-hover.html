@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ms-class</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="../avalon.js"></script>
+    <style>
+        .ms-class div {
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .active {
+            background: black;
+            color: white;
+        }
+
+        .bgRed {
+            background: palegoldenrod;
+        }
+
+        .hover {
+            background: red;
+            color: white;
+        }
+        .ms-class-test {
+            background: green;
+            width: 300px;
+            height: 100px;
+        }
+
+        .c-red {
+            background: red;
+        }
+
+        .c-blue {
+            background: blue;
+        }
+        .zebra-table {
+            border-collapse: collapse;
+            width: 400px;
+            border: 1px solid black;
+        }
+
+        .zebra-table td {
+            border: 1px solid black;
+            text-indent: 1em;
+        }
+
+        .zebra-table .even td {
+            background: black;
+            color: white;
+        }
+
+        .zebra-table .hover td {
+            color: red;
+            font-weight: bolder;
+        }
+
+    </style>
+    <script type="text/javascript">
+        var model = avalon.define({
+            $id: "test",
+            w: 500,
+            h: 200,
+            bottom: true,
+            num: "00",
+            className: "点我",
+            changeClassName: function() {
+                model.num = (100 * Math.random()).toFixed(0);
+                model.className = this.className
+            }
+        })
+        var model = avalon.define({
+            $id: "test1",
+            color: "red",
+            toggle: true,
+            switchColor: function() {
+                model.color = model.color === "red" ? "blue" : "red"
+            },
+            changeToggle: function() {
+                model.toggle = !model.toggle
+            }
+        })
+        avalon.define({
+            $id: "test2",
+            array: avalon.range(0, 14) // 生成数组
+        })
+    </script>
+</head>
+<body>
+<h1>示例2 ms-active ms-hover</h1>
+<div ms-controller="test" class="ms-class">
+<div ms-active="active">测试:active</div>
+<div ms-hover="hover">测试:hover</div>
+<div ms-class="bgRed width{{w}} height{{h}}" ms-css-width="h">
+    类名通过插值表达式生成
+    <br/> {{w}} * {{h}}
+    <br/>
+    <input data-duplex-event="change" ms-duplex="h">
+</div>
+<p>
+    <button type="button" ms-class="test{{num}}" ms-click="changeClassName">{{className}}</button>
+</p>
+</div>
+
+<h1>示例2 ms-hover</h1>
+<div ms-controller="test1">
+    <div class="ms-class-test" ms-hover="c-{{color}}:toggle"> </div>
+    <button ms-click="switchColor"> 点我改变类名</button>
+    <button ms-click="changeToggle"> 点我改变toggle</button>
+</div>
+
+<h1>示例3 斑马线效果</h1>
+<div ms-controller="test2">
+<table class="zebra-table">
+    <tr ms-repeat="array" ms-hover="hover" ms-class="even: $index % 2 == 0">
+        <td>{{$index}}</td>
+        <td>2015-11-28</td>
+    </tr>
+</table>
+</div>
+
+</body>
+</html>

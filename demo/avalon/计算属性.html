@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>计算属性</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="avalon.js"></script>
+
+    <script>
+        avalon.define({
+            $id: "test",
+            firstName: "司徒",
+            lastName: "正美",
+            $computed: {
+                fullName: { //一个包含set或get的对象
+                    set: function(val) { //里面必须用this指向vm，但不能使用vm
+                        var array = (val || "").split(" ");
+                        this.firstName = array[0] || "";
+                        this.lastName = array[1] || "";
+                    },
+                    get: function() {
+                        return this.firstName + " " + this.lastName;
+                    }
+                }
+            }
+        })
+    </script>
+</head>
+
+<body>
+<div ms-controller="test">
+    <p>First name:
+        <input ms-duplex="firstName" />
+    </p>
+    <p>Last name:
+        <input ms-duplex="lastName" />
+    </p>
+    <p>Hello,
+        <input ms-duplex="fullName">
+    </p>
+    <div>{{firstName +" "+ lastName }}</div>
+</div>
+</body>
+
+</html>

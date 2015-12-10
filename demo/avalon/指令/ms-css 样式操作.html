@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<!--使用ms-css属性值不能加入CSS hack与important!-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="../avalon.js"></script>
+</head>
+
+<body>
+<script>
+    var vm = avalon.define({
+        $id: "test",
+        background: "red"
+    })
+    vm.$watch("background", function (v) {
+        vm.background = v
+    })
+</script>
+<div ms-controller="test">
+    <div style="width:200px; height:50px" ms-css-background="background"></div>
+    <select ms-duplex="background">
+        <option value="red">红</option>
+        <option value="yellow">黄</option>
+        <option value="green">绿</option>
+    </select>
+</div>
+
+<style>
+    .handerx {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        color: #fff;
+        background: #000;
+    }
+
+    .sliderx {
+        width: 100%;
+        height: 20px;
+        position: relative;
+    }
+
+    .body {
+        padding: 40px;
+    }
+</style>
+<script>
+    var vm = avalon.define({
+        $id: "test1",
+        percent: 0
+    });
+    var a = true;
+    var id = setInterval(function () {
+        if (a) {
+            if (vm.percent < 100) {
+                vm.percent++
+            } else {
+                a = false;
+            }
+        } else {
+            if (vm.percent > 0) {
+                vm.percent--
+            } else {
+                a = true;
+            }
+        }
+    }, 50)
+
+</script>
+<div ms-controller="test1" class="body">
+    <div class="slider" style="background:red;">
+        <div class="handerx" ms-css-left="{{percent}}%">{{percent}}</div>
+        <div style="background: greenyellow;height:20px" ms-css-width="{{percent}}%"></div>
+    </div>
+
+    <div class="sliderx" style="background:#d2d2d2;">
+        <div style="background: #2FECDC;height:20px" ms-css-width="{{100-percent}}%"></div>
+    </div>
+</div>
+
+<script>
+    var vm1 = avalon.define({
+        $id: "test2",
+        w: 100,
+        h: 100,
+        click: function () {
+            vm1.w = parseFloat(vm1.w) + 10;
+            vm1.h = parseFloat(vm1.h) + 10;
+        }
+    })
+</script>
+
+<div ms-controller="test2">
+    <div style=" background: #a9ea00;" ms-css-width="w" ms-css-height="h" ms-click="click"></div>
+    <p>{{ w }} x {{ h }}</p>
+    <p>W:
+        <input type="text" ms-duplex="w" data-duplex-event="change"/>
+    </p>
+    <p>H:
+        <input type="text" ms-duplex="h"/>
+    </p>
+</div>
+
+
+</body>
+
+</html>

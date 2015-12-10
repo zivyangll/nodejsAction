@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<!--单向同步-->
+<!--ms-duplex-string, ms-repeat与计算属性的混合使用-->
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../avalon.js"></script>
+    <script>
+        avalon.define({
+            $id: "test",
+            selected: [],
+            array: [{
+                name: "小明",
+                id: 132213213
+            }, {
+                name: "小三",
+                id: 576576657
+            }, {
+                name: "小红",
+                id: 354435435
+            }, {
+                name: "小白",
+                id: 354435435
+            }],
+            textarea: {
+                get: function() {
+                    return this.selected.join("\n")
+                }
+            }
+        })
+    </script>
+</head>
+
+<body>
+<div ms-controller="test">
+    <ul>
+        <li ms-repeat="array">
+            <input ms-duplex-string="selected" ms-attr-value="el.name" type="checkbox">{{el.name}} {{el.id}}</li>
+    </ul>
+        <textarea ms-attr-value="textarea" placeholder="这里只能单向同步">
+ 
+        </textarea>
+</div>
+</body>
+
+</html>

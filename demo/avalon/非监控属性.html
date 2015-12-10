@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<!--
+这包括框架添加的$id, $events, $model属性, $fire, $watch, $unwatch方法
+及用户自己设置的以$开头的属性，放在$skipArray数组中的属性，值为函数、各种DOM节点的属性
+改变它们的值不会产生同步视图的效果。
+-->
+<head>
+    <title>unobservable</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="avalon.js"></script>
+    <script>
+        var vm = avalon.define({
+            $id: "test",
+            $aaa: "sss",
+            $skipArray: ["bbb", "ccc"], // 放在$skipArray数组中的属性
+            aaa: 111,
+            bbb: 222,
+            ccc: 333,
+            fn: function() { //值为函数
+                return "函数"
+            },
+            click: function() {
+                vm.$aaa = "change";
+                vm.aaa = 'change';
+                vm.bbb = 'change';
+                vm.ccc = 'change';
+                vm.fn = function() {
+                    return "----------"
+                }
+            }
+        })
+    </script>
+</head>
+
+<body ms-controller="test">
+<p>{{$aaa}}</p>
+<p>{{aaa}}</p>
+<p>{{bbb}}</p>
+<p>{{ccc}}</p>
+<p>{{fn()}}</p>
+<button type="button" ms-click="click">点我</button>
+</body>
+
+</html>

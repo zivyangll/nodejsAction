@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="octogons">
+    <div class="octogon" id="octogon1">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            1
+        </div>
+    </div>
+    <div class="octogon" id="octogon2">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            2
+        </div>
+    </div>
+    <div class="octogon" id="octogon3">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            3
+        </div>
+    </div>
+    <div class="octogon" id="octogon4">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            4
+        </div>
+    </div>
+    <div class="octogon" id="octogon5">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            5
+        </div>
+    </div>
+    <div class="octogon" id="octogon6">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            6
+        </div>
+    </div>
+    <div class="octogon" id="octogon7">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            7
+        </div>
+    </div>
+    <div class="octogon" id="octogon8">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            8
+        </div>
+    </div>
+    <div class="octogon" id="octogon9">
+        <div class="octogon-left">
+            <div></div>
+        </div>
+        <div class="octogon-middle">
+            <div></div>
+        </div>
+        <div class="octogon-right">
+            <div></div>
+        </div>
+        <div class="inner">
+            9
+        </div>
+    </div>
+</div>
+<style>
+
+    .octogon-left {
+        position:absolute;
+        left:0;
+        top:0;
+        width:0;
+        height:0;
+        border-top:60px solid transparent;
+        border-bottom:60px solid transparent;
+        border-right:35px solid green;
+        z-index:1;
+    }
+    .octogon-left div{
+        position:absolute;
+        left:4px;
+        top:-60px;
+        width:0;
+        height:0;
+        border-top:60px solid transparent;
+        border-bottom:60px solid transparent;
+        border-right:35px solid green;
+    }
+
+    .octogon-middle {
+        position:absolute;
+        left:35px;;
+        top:0;
+        width:66px;
+        height:120px;
+        background: green;
+        z-index:4;
+    }
+    /*箭头向右*/
+    .octogon-right {
+        position:absolute;
+        left:101px;
+        top:0;
+        width:0;
+        height:0;
+        border-top:60px solid transparent;
+        border-bottom: 60px solid transparent;
+        border-left: 35px solid green;
+        z-index:1;
+    }
+    .octogon-right div{
+        position:absolute;
+        right:4px;
+        top:-60px;
+        width:0;
+        height:0;
+        border-top:60px solid transparent;
+        border-bottom: 60px solid transparent;
+        border-left: 35px solid green;
+
+    }
+    .octogon:hover .octogon-left{
+        border-right-color:lightgreen;
+    }
+    .octogon:hover .octogon-right{
+        border-left-color:lightgreen;
+    }
+    .octogon:hover .octogon-middle{
+        height:110px;
+        border-top:5px solid lightgreen;
+        border-bottom:5px solid lightgreen;
+    }
+    .octogon .inner{
+        width:100px;
+        height:80px;
+        /* background: red;这里以后要去掉*/
+        position: absolute;
+        text-align: center;
+        line-height: 80px;
+        left: 20px;
+        top: 20px;
+        z-index:10;
+    }
+    .octogons{
+        width: 360px;
+        height: 450px;
+        background: yellowgreen;
+        position: relative;
+        margin:0 auto;
+
+    }
+    #octogon1{
+        position: absolute;
+        top: 65px;
+        left: 0;
+    }
+    #octogon2{
+        position: absolute;
+        top: 195px;
+        left: 0;
+    }
+    #octogon3{
+        position: absolute;
+        top: 325px;
+        left: 0;
+    }
+    #octogon4{
+        position: absolute;
+        top: 0px;
+        left: 110px;
+    }
+    #octogon5{
+        position: absolute;
+        top: 130px;
+        left: 110px;
+    }
+    #octogon6{
+        position: absolute;
+        top: 260px;
+        left: 110px;
+    }
+    #octogon7{
+        position: absolute;
+        top: 65px;
+        left: 220px;
+    }
+    #octogon8{
+        position: absolute;
+        top: 195px;
+        left: 220px;
+    }
+    #octogon9{
+        position: absolute;
+        top: 325px;
+        left: 220px;
+    }
+</style>
+</body>
+</html>
