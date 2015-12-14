@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="gundongtiao.css">
+    <script src="../jquery-1.8.2.js"></script>
+</head>
+<body>
+<div id="timeline">
+    <div class="todayTime"></div>
+    <div class="tempTimeline">
+        <div class="oneTime">1</div>
+        <div class="oneTime">2</div>
+        <div class="oneTime">3</div>
+        <div class="oneTime">4</div>
+        <div class="oneTime">5</div>
+        <div class="oneTime">6</div>
+        <div class="oneTime">7</div>
+    </div>
+</div>
+</body>
+<script>
+    $('.tempTimeline').height($('#timeline').height() - 30);
+    $(window).bind("resize", function(){
+        $('.tempTimeline').height($('#timeline').height() - 30);
+    });
+    run();
+    var repeatTime = 0; // 滚动条重复次数
+    var fistScrollHeight = 0; // 第一次滚动到底部的高度
+    function run() {
+        setInterval(scroll, "10");
+    }
+    function scroll(){
+        var obj =document.getElementsByClassName('tempTimeline')[0];
+        var tmp = (obj.scrollTop)++;
+//        //当滚动条到达顶端时，把当前HTML内容追加一遍，但是会导致页面内容指数方增加
+        if (obj.scrollTop==tmp) {
+            repeatTime++;
+            if(repeatTime == 1) { // 当第一遍滚动到底部时，重复一遍内容，并记录当前滚动的高度
+                fistScrollHeight  = obj.scrollTop;
+                obj.innerHTML += obj.innerHTML;
+            }else{
+                obj.scrollTop = fistScrollHeight;
+            }
+        }
+    }
+
+</script>
+</html>

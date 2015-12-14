@@ -1,0 +1,163 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#left{
+  position:absolute;
+  top: 15px;
+  left: 15px;
+  width: 400px;
+  background-color: white;
+
+}
+#logo{
+  height: 65px;
+  background-image: url(./logo.png);
+}
+#baseInfo{
+  position:absolute;
+  top: 65px;
+  width: 400px;
+  height: 35px;
+}
+.info{
+  width:380px;
+  color: #0d62bb;
+  font-weight:bold;
+  margin-top:12px;
+  margin-left:10px;
+  padding-bottom: 10px;
+  font-size:0.85em;
+  border-bottom: 1px #dedede solid;
+  background: url(./point.png) no-repeat ;
+  span{
+    margin-left:25px;
+  }
+}
+#time{
+  position:absolute;
+  top: 110px;
+  width: 400px;
+  margin-left:10px;
+  height: 25px;
+  span{
+    font-size:0.85em;
+    margin-right:17px;
+  }
+}
+#layerSelect{
+  position:absolute;
+  top: 130px;
+  width: 400px;
+  height: 35px;
+}
+
+#layer{
+  position:absolute;
+  top: 165px;
+  width: 400px;
+  height: 80px;
+  .oneLayer{
+    width:130px;
+    height:60px;
+    float:left;
+    img{
+      margin:10px 45px 6px;
+      cursor: pointer;
+    }
+    p{
+      font-size:0.85em;
+      margin-left:40px;
+    }
+  }
+}
+
+#tongjiInfo{
+  position:absolute;
+  top: 245px;
+  width: 400px;
+  height: 35px;
+}
+
+#tongjiMenu{
+  position:absolute;
+  top: 297px;
+  width: 350px;
+  margin-left:25px;
+  height: 35px;
+  border: 1px solid #dedede;
+  div{
+    float:left;
+    width: 116px;
+    height:35px;
+    line-height: 35px;
+    text-align: center;
+    cursor:pointer;
+    border-right:1px solid #dedede;
+    &:last-child{
+      border-right:0;
+    }
+    &:hover{
+      background-color: #0c7dd6;
+      color:white;
+    }
+  }
+}
+
+#tongjiList{
+  position:absolute;
+  top: 335px;
+  width: 350px;
+  margin-left:25px;
+  height: 100px;
+  .oneList{
+    margin-top:5px;
+    float:left;
+    height:50px;
+    width:116px;
+    text-align: center;
+    .num{
+      font-size:1.3em;
+      font-weight:bold;
+      color: #d94958;
+    }
+    .descrip{
+      margin-top:3px;
+      font-size:0.8px;
+    }
+
+  }
+}
+
+#shiduantongji{
+  position:absolute;
+  top: 440px;
+  width: 400px;
+  height: 35px;
+}
+
+#shiduanGraph{
+  position:absolute;
+  top: 485px;
+  width: 390px;
+  margin-left:5px;
+  height: 150px;
+  border:1px #86b5ff solid;
+}
+
+#quduantongji{
+  position:absolute;
+  top: 635px;
+  width: 400px;
+  height: 35px;
+}
+
+#quduanGraph{
+  position:absolute;
+  top: 680px;
+  width: 390px;
+  margin-left:5px;
+  height: 300px;
+  border:1px #86b5ff solid;
+}

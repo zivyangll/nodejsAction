@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery-1.8.2.js"></script>
+    <link rel="stylesheet" href="qipaokuozhan.css">
+</head>
+<body>
+<div id="timeline">
+    <div class="todayTime">
+        <div class="timecircle"></div>
+        <div class="timecircle2"></div>
+        <div class="time">2015-12-14</div>
+    </div>
+    <div class="tempTimeline">
+        <div class="oneTime">
+            <div class="all">
+                <div class="clocktime">
+                    <div class="time">13:40</div>
+                </div>
+                <div class="clockline">
+                    <div class="circle"></div>
+                    <div class="line"></div>
+                </div>
+                <div class="jiantou">
+                    <div class="bot"></div>
+                    <div class="top"></div>
+                </div>
+                <div class="bubble">
+                    <div class="test">
+                        <div class="title">武汉市醉驾中心查处的第一人 被同一民警再次查获</div>
+                        <div class="img"><img src="./308x154.png"/></div>
+                        <div class="content">交管大队在辖区内查获一名酒驾司机，该司机于辖区内查获一名酒驾司机，该司机于辖区内查获一名酒驾司机，该司机于3年前因酒驾被吊销了执照，是武汉市醉驾中心处罚的第一人。当晚他竟被同一民警再次查获</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="oneTime">
+            <div class="all">
+                <div class="clocktime">
+                    <div class="time">13:40</div>
+                </div>
+                <div class="clockline">
+                    <div class="circle"></div>
+                    <div class="line"></div>
+                </div>
+                <div class="jiantou">
+                    <div class="bot"></div>
+                    <div class="top"></div>
+                </div>
+                <div class="bubble">
+                    <div class="test">
+                        <div class="title">武汉市醉驾中心查处的第一人 被同一民警再次查获</div>
+                        <div class="img"><img src="./308x154.png"/></div>
+                        <div class="content">交管大队酒民警再次查获</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        var contentArray = document.getElementsByClassName('all');
+        for(var i = 0; i < contentArray.length; i++){ // 根据气泡高度调整大小
+            var bubbleHeight = $('.bubble:eq('+i+')').height();
+            $(contentArray[i]).height(bubbleHeight)
+        }
+    })
+
+
+</script>
+</html>

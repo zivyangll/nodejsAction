@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery-1.8.2.js"></script>
+    <link rel="stylesheet" href="qipaokuozhan.css">
+</head>
+<body>
+<div id="timeline">
+    <div class="todayTime">
+        <div class="timecircle"></div>
+        <div class="timecircle2"></div>
+        <div class="time">2015-12-14</div>
+    </div>
+    <div class="tempTimeline">
+        <div class="oneTime">
+            <div class="all">
+                <div class="clocktime">
+                    <div class="time">13:40</div>
+                </div>
+                <div class="clockline">
+                    <div class="circle"></div>
+                    <div class="line"></div>
+                </div>
+                <div class="jiantou">
+                    <div class="bot"></div>
+                    <div class="top"></div>
+                </div>
+                <div class="bubble">
+                    <div class="test">
+                        <div class="title">武汉市醉驾中心查处的第一人 被同一民警再次查获</div>
+                        <div class="img"><img src="./308x154.png"/></div>
+                        <div class="content">交管大队在辖区内查获一名酒驾司机，。当晚他竟被同一民警再次查获</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function () { // 动态加载数据
+        var timelineData = [{"title":"简易事故 雄楚大街雄楚大街(尤李村路口至桂元路口路段)F10米","image":"","context":" 2015年12月14日17时00分，魏昌德(男，53岁，驾驶证号420104196204241276)驾驶车牌号为鄂AXN137的小型客车，沿雄楚大街行驶至尤李村路口工贸家电路段时，与行人赵亮(男，39岁)刮撞行人，致受伤1人，直接财产损失0元的交通事故。当事人魏昌德负主要责任；当事人赵亮穿过道路隔离设施负次要责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"简易事故 珞狮南路理工大路口10米","image":"","context":" 2015年12月14日17时00分，王文才(男，27岁，驾驶证号420984198801094512)驾驶车牌号为鄂AR68C5的小型客车，沿珞狮南路行驶至珞狮南路理工大路口10米时，与徐小林(男，36岁)驾驶的车牌号为鄂A390A5的小型客车碰撞静止车辆，致直接财产损失400元的交通事故。当事人王文才负全部责任；当事人徐小林无责任；","time":"17:00:00"},
+            {"title":"2 黄土线K","image":"","context":"2015年12月14日11时40分，二辆小车发生碰撞","time":"11:40:00"},{"title":"简易事故 张之洞路张之洞路(楚善街路口至首义路路口路段)E10米","image":"","context":" 2015年12月14日11时17分，陈雅笛(女，31岁，驾驶证号341225198404134704)驾驶车牌号为鄂A71PV7的小型客车，沿张之洞路行驶至张之洞路张之洞路(楚善街路口至首义路路口路段)E10米时，与赵西民(男，41岁)驾驶的车牌号为鄂AA3N86的小型客车碰撞运动车辆，致直接财产损失0元的交通事故。当事人陈雅笛负全部责任；当事人赵西民无责任；","time":"11:17:00"},{"title":"简易事故 张之洞路张之洞路(解放路口至复兴路口路段)E10米","image":"","context":" 2015年12月14日10时53分，汪汉武(男，29岁，驾驶证号420106198608161274)驾驶车牌号为鄂N22543的小型客车，沿张之洞路行驶至张之洞路张之洞路(解放路口至复兴路口路段)E10米时，与周钢(男，39岁)驾驶的车牌号为鄂AP3043的大型客车碰撞运动车辆，致直接财产损失0元的交通事故。当事人汪汉武负全部责任；当事人周钢无责任；","time":"10:53:00"}];
+        var timelineContent = '';
+        for(var i = 0; i < timelineData.length; i++){
+            var data = timelineData[i];
+            timelineContent += (''+
+            '<div class="oneTime">' +
+            '            <div class="all">' +
+            '                <div class="clocktime">' +
+            '                    <div class="time">'+data.time+'</div>' +
+            '                </div>' +
+            '                <div class="clockline">' +
+            '                    <div class="circle"></div>' +
+            '                    <div class="line"></div>' +
+            '                </div>' +
+            '                <div class="jiantou">' +
+            '                    <div class="bot"></div>' +
+            '                    <div class="top"></div>' +
+            '                </div>' +
+            '                <div class="bubble">' +
+            '                    <div class="test">' +
+            '                        <div class="title">'+data.title+'</div>' +
+//            '                        <div class="img"><img src="'+data.img+'"/></div>' +
+            '                        <div class="content">'+data.context+'</div>' +
+            '                    </div>' +
+            '                </div>' +
+            '            </div>' +
+            '        </div>');
+        }
+        $('.tempTimeline').html(timelineContent);
+    });
+
+    $(document).ready(function () {// 根据气泡高度调整大小
+        var contentArray = document.getElementsByClassName('all');
+        for(var i = 0; i < contentArray.length; i++){
+            var bubbleHeight = $('.bubble:eq('+i+')').height();
+            $(contentArray[i]).height(bubbleHeight)
+        }
+    });
+    var repeatTime = 0; // 滚动条重复次数
+    var fistScrollHeight = 0; // 第一次滚动到底部的高度
+    $(document).ready(function(){ // 滚动
+        $('.tempTimeline').height($('#timeline').height() - 30);
+        $(window).bind("resize", function(){
+            $('.tempTimeline').height($('#timeline').height() - 30);
+        });
+        var currentHeight = $('#timeline').height();
+        var timeLineHeight = 0;
+        var contentArray = document.getElementsByClassName('all');
+        for(var i = 0; i < contentArray.length; i++){
+            timeLineHeight += $(contentArray[i]).height();
+        }
+        if(timeLineHeight > currentHeight) {
+            run();
+        }
+    });
+
+    function run() {
+        setInterval(scroll, "10");
+    }
+    function scroll(){
+        var obj =document.getElementsByClassName('tempTimeline')[0];
+        var tmp = (obj.scrollTop)++;
+        if (obj.scrollTop==tmp) {
+            repeatTime++;
+            if(repeatTime < 3) {
+                fistScrollHeight  = obj.scrollTop;
+                obj.innerHTML += obj.innerHTML;
+            }else{
+                obj.scrollTop = fistScrollHeight;
+            }
+        }
+    }
+
+</script>
+</html>

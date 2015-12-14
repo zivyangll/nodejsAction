@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+#timeline {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  height: 95%;
+  border: solid red 1px; }
+  #timeline .todayTime {
+    width: 100%;
+    height: 30px;
+    border: solid yellow 1px; }
+  #timeline .tempTimeline {
+    position: relative;
+    width: 100%;
+    overflow: hidden; }
+    #timeline .tempTimeline .oneTime {
+      width: 100%;
+      height: 170px;
+      border: solid blue 1px; }
+
+/*# sourceMappingURL=gundongtiao.css.map */
